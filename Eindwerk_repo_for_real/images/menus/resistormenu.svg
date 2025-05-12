@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="printplaat" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1096.4 621.78">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        isolation: isolate;
+      }
+
+      .cls-4 {
+        fill: #001f38;
+      }
+
+      .cls-5 {
+        fill: #707070;
+      }
+
+      .cls-2 {
+        stroke: #707070;
+      }
+
+      .cls-6 {
+        fill: #afafaf;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-6" x=".5" y="98.6" width="99" height="279"/>
+    <path class="cls-5" d="M99,99.1v278H1V99.1h98M100,98.1H0v280h100V98.1h0Z"/>
+  </g>
+  <polygon class="cls-4" points="253 128.1 223 98.1 98 98.1 98 378.1 223 378.1 253 348.1 253 128.1"/>
+  <g>
+    <g id="Ellipse_1">
+      <circle class="cls-1" cx="225" cy="138.28" r="5"/>
+      <circle class="cls-2" cx="225" cy="138.28" r="4.5"/>
+    </g>
+    <path id="Path_33" class="cls-2" d="M98,149.6h115.94l7.94-7.94"/>
+  </g>
+  <g>
+    <g id="Ellipse_1-2" data-name="Ellipse_1">
+      <circle class="cls-1" cx="225" cy="189.28" r="5"/>
+      <circle class="cls-2" cx="225" cy="189.28" r="4.5"/>
+    </g>
+    <path id="Path_33-2" data-name="Path_33" class="cls-2" d="M98,200.6h115.94l7.94-7.94"/>
+  </g>
+  <g>
+    <g id="Ellipse_1-3" data-name="Ellipse_1">
+      <circle class="cls-1" cx="225" cy="240.28" r="5"/>
+      <circle class="cls-2" cx="225" cy="240.28" r="4.5"/>
+    </g>
+    <path id="Path_33-3" data-name="Path_33" class="cls-2" d="M98,251.6h115.94l7.94-7.94"/>
+  </g>
+  <g>
+    <g id="Ellipse_1-4" data-name="Ellipse_1">
+      <circle class="cls-1" cx="225" cy="291.28" r="5"/>
+      <circle class="cls-2" cx="225" cy="291.28" r="4.5"/>
+    </g>
+    <path id="Path_33-4" data-name="Path_33" class="cls-2" d="M98,302.6h115.94l7.94-7.94"/>
+  </g>
+  <g>
+    <g id="Ellipse_1-5" data-name="Ellipse_1">
+      <circle class="cls-1" cx="225" cy="342.28" r="5"/>
+      <circle class="cls-2" cx="225" cy="342.28" r="4.5"/>
+    </g>
+    <path id="Path_33-5" data-name="Path_33" class="cls-2" d="M98,353.6h115.94l7.94-7.94"/>
+  </g>
+  <image id="LDR" class="cls-3" width="80" height="40" transform="translate(8 256.1)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAoCAYAAABpYH0BAAAACXBIWXMAAAsSAAALEgHS3X78AAAAuklEQVRoge3YwQqFIBBGYQ3f/5VrU5uIbPhnJq3zQdyNIB3UbpUSa92vqPG/QEQHV1HuIlnHv2ZJmqfuv08jWMe/pvaHuDoH6c1vHZ8uawUerAGGC3bWEueybsfhty8ceG6RmVaM231nn4GfQ0BR1ENkxKdnyBHDChQRUERAEQFFBBQRUNTKXG8QXtzumRUoIqCoFb+3hpmOAj4mjIKAIgKKCCgioIiAoqgPqjP9pZGwAkUEBAAAAJBvA3/XGi/m1DUcAAAAAElFTkSuQmCC"/>
+  <image id="Potentiometer" class="cls-3" width="81" height="61" transform="translate(6 306.1)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAAA9CAYAAADVuYUXAAAACXBIWXMAAAsSAAALEgHS3X78AAAA4klEQVR4nO3Z4QqCMBhA0RW9/yvXL0FIIugKn3TOA4x5m5vaWgAA8O4Wj/eMxztTdu33aqB/JmLgceLY9VZROGW7sRIDIgZEDIgYEDEgYmB7xLnSm0Ylu2YrMSBiYLudq7eLK20LPkBMImJAxICIAREDIgbO/Ch7pcedn1iJAREDE/8H2dtvCWPnOnZi63hPHTnfkZNanw+lcXMeN6H13ak+at4OlsCoX/TAJQ4WKzEgYkDEgIgBEQMiBkQMiBgQMSBiQMSAiAERAyIGRAyIGBAxIGJAxICIAREDIgZEDIgYeAEHygtr+KBOZwAAAABJRU5ErkJggg=="/>
+  <image id="Resistor" class="cls-3" width="81" height="41" transform="translate(7 104.1)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAAApCAYAAABN/sWaAAAACXBIWXMAAAsSAAALEgHS3X78AAAAe0lEQVRoge3YgQnEIBAAQfPYf8tJEb8HkcwUcOAioq4FAACMuOJ5dzxvUrb2XzXoy0QM7MHZ9VFRGDlu7MSAiAERAyIGRAyIGNjrrFdGqVr3ZScGRAzs1b4sTjoafEC8iYgBEQMiBkQMiBiY/JQ96brzFzsxICIAAPBeD1iFBjW25gUlAAAAAElFTkSuQmCC"/>
+  <image id="Thermistor" class="cls-3" width="80" height="40" transform="translate(6 206.1)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAoCAYAAABpYH0BAAAACXBIWXMAAAsSAAALEgHS3X78AAAA+klEQVRoge3ZwQ6CMBRE0avx/39ZF4SEGBcCfdOZl969lJ6UUhVWt3rMvgFB7wuf+dvleeHiSV3BO1XnFXjEK5tnV0AJXvnFJyXDkwwgToonG0SUHG/0QOVvvIENm3f3Y0x5C/Bmr6LrKvags3teyRaTugKnvDB+lQhogwd5gFZ4kAVohwc5gJZ4kAFoiwfbMcb5G0QV3rA5O69A65W35woYgQfbIzzqBkc9Fgq8tj8mxKy8PSfAODzwAYzEAw/AWDyYDxiNB3MB4/HA9HQvqO0xJq4FeDPl3tNiz/tONZGWeOD571lU1RNqjQe1k2qPB5q3cFu81WoV3wf8WSNBLct3QwAAAABJRU5ErkJggg=="/>
+  <image id="Varistor" class="cls-3" width="81" height="41" transform="translate(7 155.1)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAAApCAYAAABN/sWaAAAACXBIWXMAAAsSAAALEgHS3X78AAAA+klEQVRoge3Zyw6DQAxD0duq///L7QpRVbColGRsa7xkAeQok+EBOzsKeay+gaa8b4631PvsOKlARpsjFREGIZMR75Z0eVIRvwHbOzIR8QqwFTJtdx7twK4Ljc2hgpTVnricx7MRC/JqPPfETPp3BraMG+dOXLKJXMUVUQYQPBGlAMEPUQ4QvBAlAcEHURYQzkcc5TeNLsCymtU7UboDjygjWgDCuZyrbrJqiUwARn+AsOnAI2qIdoCghWgJCDqItoCggWgNCOsR7QFh/2MpyepOjMhGLMj0HIqYgb+ZLCQSEOaKiQUEzd+adukuKh4Q5nbnWMCdnZ2ofACOMyFIvs/YewAAAABJRU5ErkJggg=="/>
+</svg>

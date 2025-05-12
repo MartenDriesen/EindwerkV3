@@ -1,0 +1,27 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment folders
+env/
+venv/
+.venv/
+
+# VS Code settings (optional)
+.vscode/
+
+# PyCharm settings (optional)
+.idea/
+
+# Mac system files (optional)
+.DS_Store
+
+# Log files
+*.log
+
+# Jupyter Notebook checkpoints (if any)
+.ipynb_checkpoints/
+
+# Environment variable files
+.env
