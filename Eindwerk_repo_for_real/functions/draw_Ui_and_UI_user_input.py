@@ -1,5 +1,5 @@
 import pygame
-from main.global_constants import font, font3, screen, ui, ui2, new_height, new_width2, SCREEN_HEIGHT, SCREEN_WIDTH, LIGHT_BLUE, GREEN, YELLOW, BROWN, RED, BLACK, WHITE
+from main.global_constants import font, font4, screen, ui, ui2, new_height, new_width2, SCREEN_HEIGHT, SCREEN_WIDTH, LIGHT_BLUE, GREEN, YELLOW, BROWN, RED, BLACK, WHITE
 new_width = SCREEN_WIDTH  # The width should be equal to the screen width
 new_height2 = SCREEN_HEIGHT
 
@@ -58,7 +58,9 @@ def draw_Ui(hide_left_menu, env_temp, env_light, user_input_temp_bool, user_inpu
 
     screen.blit(wire_color_title, wire_color_title_rect)
 
-    
+
+
+
 
 
 
@@ -95,7 +97,7 @@ def env_temp_function(mouse_pos, left_mouse_button, envTemp, event, user_input_t
             user_input_temp_bool = False
             if env_temp_string == "0":
                 env_temp_string = "21"    
-    if event and event.type == pygame.KEYDOWN:
+    if event:
         if event.key == pygame.K_DELETE:               
             if user_input_temp_bool:  
                 env_temp_string = ""    

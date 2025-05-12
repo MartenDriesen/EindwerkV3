@@ -11,7 +11,7 @@ from main.global_constants import *
 from functions.draw_virtual_grid import draw_virtual_grid
 from functions.componentMenus import componentMenus, save_component
 from functions.hide_component_menu import hide_component_menu
-
+from functions.feedback import feedback
 from functions.draw_Ui_and_UI_user_input import draw_Ui, select_connection_color, env_temp_function, env_light_function
 from functions.placing_component import placing_component
 from functions.snap_to_grid import snap_to_grid, snap_to_virtual_grid
@@ -129,6 +129,7 @@ saved_component = None
 edit_component_props = None
 right_clicked_comp = None
 
+feedbacktekst = None
 menu_is_open = False
 placed_comp_is_saved_comp = False
 left_mouse_button = False
@@ -566,7 +567,9 @@ while running:
     loaded_components, loaded_connections, hand_cursor = newFile(mouse_pos, left_mouse_button, components, connections, hand_cursor)
     show_project_name()
 
-    hand_cursor = save_button(components, connections, mouse_pos, left_mouse_button, menu_is_open, key_down_event, hand_cursor)
+    feedbacktekst = feedback(key_down_event, mouse_pos, left_mouse_button)
+
+    hand_cursor = save_button(components, connections, mouse_pos, left_mouse_button, menu_is_open, key_down_event, hand_cursor, feedbacktekst)
     hand_cursor = new_file_button(mouse_pos, left_mouse_button, components, connections, menu_is_open, hand_cursor)
     
     imported_components, imported_connections, hand_cursor = import_project(mouse_pos, left_mouse_button, menu_is_open, hand_cursor)
