@@ -11,7 +11,7 @@ from main.global_constants import *
 from functions.draw_virtual_grid import draw_virtual_grid
 from functions.componentMenus import componentMenus, save_component
 from functions.hide_component_menu import hide_component_menu
-from functions.feedback import feedback
+from functions.feedback import get_feedback
 from functions.draw_Ui_and_UI_user_input import draw_Ui, select_connection_color, env_temp_function, env_light_function
 from functions.placing_component import placing_component
 from functions.snap_to_grid import snap_to_grid, snap_to_virtual_grid
@@ -26,7 +26,7 @@ from functions.draw_selected_components_and_connections import draw_selected_com
 from functions.draw_existing_connections import draw_existing_connections
 from functions.clicked_on_component import clicked_on_component
 from functions.draw_collision_circles import draw_collision_circles
-from functions.save_load_projects import save_button, newFile, show_project_name, load_project, new_file_button, is_menu_open
+from functions.save_load_projects import save_button, newFile, show_project_name, load_project, new_file_button, is_menu_open, save_as_button
 from functions.scale_components_and_connections_based_on_zoom import scale_components_and_connections_based_on_zoom
 from functions.scale_newly_added_component import scale_newly_added_component
 from functions.cntrl_z_function import cntrl_z_function, timeline_cntrl_shift_z
@@ -98,6 +98,7 @@ from component_classes.SPST import SPST
 from component_classes.TPST_Open import TPST_Open
 from component_classes.Staircase_Timer_Auto import Staircase_Timer_Auto
 from component_classes.Circuit_Breaker import Circuit_Breaker
+from component_classes.feedbackBlock import feedbackBlock
 
 components = []
 connections = []
@@ -109,6 +110,8 @@ raw_offsets_comp = []
 raw_offsets_line = []
 timeline = []
 
+wasFeedbackBlock = None
+feedbackBlockBool = None
 saved_comp = None
 clicked_icon = None
 start_pos_selecting_rect = None
@@ -129,7 +132,7 @@ saved_component = None
 edit_component_props = None
 right_clicked_comp = None
 
-feedbacktekst = None
+
 menu_is_open = False
 placed_comp_is_saved_comp = False
 left_mouse_button = False
@@ -540,6 +543,8 @@ while running:
                 left_mouse_button_place_comp = False
                 pasted = False         
 
+    
+    
     hovering_over_comp = draw_existing_components(components, selected_components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, camera_offset_x, camera_offset_y, continious_left_mouse_button, zoom_factor)
     draw_existing_connections(connections, selected_wires, camera_offset_x, camera_offset_y, continious_left_mouse_button, virtual_mouse_pos)
     if not menu_is_open:
@@ -567,11 +572,13 @@ while running:
     loaded_components, loaded_connections, hand_cursor = newFile(mouse_pos, left_mouse_button, components, connections, hand_cursor)
     show_project_name()
 
-    feedbacktekst = feedback(key_down_event, mouse_pos, left_mouse_button)
-
-    hand_cursor = save_button(components, connections, mouse_pos, left_mouse_button, menu_is_open, key_down_event, hand_cursor, feedbacktekst)
-    hand_cursor = new_file_button(mouse_pos, left_mouse_button, components, connections, menu_is_open, hand_cursor)
+   
     
+
+    hand_cursor = save_button(components, connections, mouse_pos, left_mouse_button, menu_is_open, key_down_event, hand_cursor)
+    hand_cursor = save_as_button(mouse_pos, left_mouse_button, components, connections, menu_is_open, hand_cursor)
+    hand_cursor = new_file_button(mouse_pos, left_mouse_button, components, connections, menu_is_open, hand_cursor)
+   
     imported_components, imported_connections, hand_cursor = import_project(mouse_pos, left_mouse_button, menu_is_open, hand_cursor)
 
     if imported_components or imported_connections:
@@ -619,8 +626,9 @@ while running:
             save_component(saved_component)
         saved_component = None
 
+    
 
-    if comp_name and left_mouse_button:
+    if comp_name and left_mouse_button or wasFeedbackBlock:
         dragged_component = globals()[comp_name]() 
         scale_newly_added_component(dragged_component, zoom_factor)       
         drag_offset_x = dragged_component.scale_x // 2
@@ -628,6 +636,7 @@ while running:
         drag_offset_x, drag_offset_y = snap_to_virtual_grid(drag_offset_x, drag_offset_y, zoom_factor)
         raw_offsets_dragged_comp = (drag_offset_x / (SPACING + zoom_factor)) * SPACING, (drag_offset_y / (SPACING + zoom_factor)) * SPACING
         adding_component = True
+        wasFeedbackBlock = None
     elif saved_comp and left_mouse_button:
         dragged_component = saved_comp.copy_with_new_id()
         scale_newly_added_component(dragged_component, zoom_factor)   
@@ -643,6 +652,8 @@ while running:
     else:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW) 
         
+    get_feedback(components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, left_mouse_button, key_down_event)
+
     hand_cursor = False     
 
     left_mouse_button = False 

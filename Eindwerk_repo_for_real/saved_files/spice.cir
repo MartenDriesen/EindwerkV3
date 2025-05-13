@@ -1,9 +1,0 @@
-* Auto-generated SPICE Netlist
-RR1 2 3 0
-RR2 4 5 0
-RR3 6 7 0
-.MODEL Dmodel D(IS=1e-14)
-.MODEL Qmodel NPN (BF=100)
-.MODEL Mmodel NMOS (VTO=2)
-.MODEL Zmodel D(BV=5 IBV=0.1m)
-.END

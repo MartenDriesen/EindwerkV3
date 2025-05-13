@@ -36,9 +36,13 @@ componentsMenu = [
     "Motors",
     "Transistors",
     "Thyristors",
-    "Transformers"
+    "Transformers",
+    "CommentBlock",
 ]
 
+CommentBlock = [
+     ("feedbackBlock", load_and_scale_image("./images/feedback.png", 20, 20))
+]
 # Image names (used for resistors dropdown)
 Resistors = [
     ("Resistor", load_and_scale_image("./images/Resistor.png", 80, 40)),

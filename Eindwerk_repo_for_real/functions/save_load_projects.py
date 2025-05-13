@@ -7,7 +7,6 @@ import time
 
 from main.global_constants import screen, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, RED, LIGHT_BLUE
 from component_classes.subConnection import subConnection
-from functions.save_to_mongodb import save_project_to_mongodb
 
 from component_classes.Connection import Connection
 from component_classes.AC_Motor import AC_Motor
@@ -67,7 +66,7 @@ from component_classes.SPST import SPST
 from component_classes.TPST_Open import TPST_Open
 from component_classes.Staircase_Timer_Auto import Staircase_Timer_Auto
 from component_classes.Circuit_Breaker import Circuit_Breaker
-
+from component_classes.feedbackBlock import feedbackBlock
 from main.global_constants import font2
 # Initialize Pygame
 pygame.init()
@@ -204,13 +203,13 @@ def show_project_name():
 
 
 
-def save_button(data_comps, data_lines, mouse_pos, left_mouse_button, menu_is_open_passed, event, hand_cursor, feedback):
+def save_button(data_comps, data_lines, mouse_pos, left_mouse_button, menu_is_open_passed, event, hand_cursor):
     global saving_notification
 
     mouse_x, mouse_y = mouse_pos
 
     # Render save button
-    save = "save local"
+    save = "save"
     save_text = font2.render(save, True, WHITE)
     save_rect = pygame.Rect(170, 12, 40, 30)
     screen.blit(save_text, save_rect)
@@ -227,7 +226,23 @@ def save_button(data_comps, data_lines, mouse_pos, left_mouse_button, menu_is_op
     if save_rect.collidepoint(mouse_x, mouse_y):
         hand_cursor = True
 
-    return hand_cursor     
+    return hand_cursor    
+
+def save_as_button(mouse_pos, left_mouse_button, current_components, current_connections, menu_is_open_passed, hand_cursor):
+
+    mouse_x, mouse_y = mouse_pos
+     # Render save button
+    save_as = "save as"
+    save_as_text = font2.render(save_as, True, WHITE)
+    save_as_rect = pygame.Rect(240, 12, 50, 30)
+    screen.blit(save_as_text, save_as_rect)
+
+    if save_as_rect.collidepoint(mouse_x, mouse_y) and left_mouse_button and not menu_is_open_passed:
+        save_file_explorer(current_components, current_connections)
+    
+    if save_as_rect.collidepoint(mouse_x, mouse_y):
+        hand_cursor = True
+    return hand_cursor    
 
 def new_file_button(mouse_pos, left_mouse_button, current_components, current_connections, menu_is_open_passed, hand_cursor):
     global is_saved_before_new_file, is_not_saved_before_new_file, name_new_file_menu_visible, projectname
@@ -341,7 +356,7 @@ def save_file_explorer(data_comps, data_lines):
 
 # Function to handle saving project data
 
-def save_project_data(projectpath, data_comps, data_lines):
+def save_project_data(projectname, data_comps, data_lines):
     # Serialize each component with its class name
     global old_components, old_connections
     serialized_comps = []
@@ -372,15 +387,13 @@ def save_project_data(projectpath, data_comps, data_lines):
 
     # Debug print the full project data being saved
     try:
-        with open(projectpath, 'w') as file:
+        with open(projectname, 'w') as file:
             json.dump(project_data, file, indent=4)
             old_components = data_comps.copy()
             old_connections = data_lines.copy()
     except Exception as e:
         print(f"Failed to save file: {e}")
-    
-    projectname = projectpath.split("/")[-1].split(".")[0]
-    save_project_to_mongodb(projectname, data_comps, data_lines)
+
 
 def load_project(mouse_pos, left_mouse_button, current_components, current_connections, menu_is_open_passed, hand_cursor):
     global is_saved, is_not_saved, old_components # Declare as global here
@@ -583,6 +596,7 @@ def load_file_explorer(current_components, current_connections):
         "TPST_Open": TPST_Open,
         "Staircase_Timer_Auto": Staircase_Timer_Auto,
         "Circuit_Breaker": Circuit_Breaker,
+        "feedbackBlock": feedbackBlock,
         "Connection": Connection
     }
 

@@ -55,4 +55,4 @@ font = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Po
 font2 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 14)
 font3 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 16)
 font4 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Goldman-Regular.ttf", 24)
-
+font5 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 11)

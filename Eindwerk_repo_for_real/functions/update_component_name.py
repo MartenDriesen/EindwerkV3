@@ -20,7 +20,8 @@ def update_component_name(components, dragged_comp, var):
         "Teleruptor", "Three_Way_Switch", "Four_Way_Switch", "Staircase_Timer_Auto", "Circuit_Breaker"
     ],
     "Transformer": ["Transformer"],
-    "Ground": ["Ground"]
+    "Ground": ["Ground"],
+    "feedbackBlock": ["feedbackBlock"]
 }
 
 
@@ -36,10 +37,14 @@ def update_component_name(components, dragged_comp, var):
         comp_type = type(comp).__name__
         
         # Look up the generalized type from the mapping (e.g., 'Resistor' for 'Varistor')
-        generalized_type = type_to_group.get(comp_type, comp_type)  # Fallback to comp_type if no match
-        
-        # Increment the count for this generalized type group
+        generalized_type = type_to_group.get(comp_type, comp_type)
+
+    # Ensure key exists before incrementing
+        if generalized_type not in type_counts:
+            type_counts[generalized_type] = 0
+
         type_counts[generalized_type] += 1
+
         
         # Rename the component using the first letter of the generalized type + its number
         comp.name = f"{comp.name[0]}{type_counts[generalized_type]}"
