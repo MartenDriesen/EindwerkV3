@@ -1,5 +1,5 @@
 import pygame
-from main.global_constants import WHITE, HIGHLIGHT_TEXT_COLOR, BLUETEXT, DROPDOWN_DELAY, font, font2, font3, font4
+from main.global_constants import WHITE, HIGHLIGHT_TEXT_COLOR, BLUETEXT, DROPDOWN_DELAY, font, font2, font3, font4, SCREEN_HEIGHT, SCREEN_WIDTH, screen
 # Initialize Pygame
 pygame.init()
 
@@ -23,6 +23,16 @@ def load_and_scale_image(image_path, max_width, max_height):
 
 saved_components = []
 
+component_explanations = {
+    "Resistor": ["Resists current flow.", "Used in voltage division.", "Basic passive component."],
+    "Varistor": ["Voltage-dependent resistor.", "Protects from surges.", "Non-linear resistance."],
+    "Thermistor": ["Temperature-sensitive resistor.", "NTC or PTC types.", "Used in sensors."],
+    "Capacitor": ["Stores electric charge.", "Used for filtering.", "Two conductive plates."],
+    "Diode": ["Allows current in one direction.", "Used in rectifiers.", "Has a forward voltage."],
+    "LED": ["Light Emitting Diode.", "Needs current limiting.", "Used in displays."],
+    # Add more as needed...
+}
+
 componentsMenu = [
     "Resistors",
     "Capacitors",
@@ -41,7 +51,7 @@ componentsMenu = [
 ]
 
 CommentBlock = [
-     ("feedbackBlock", load_and_scale_image("./images/feedback.png", 20, 20))
+     ("feedbackBlock", load_and_scale_image("./images/feedback.png", 40, 40))
 ]
 # Image names (used for resistors dropdown)
 Resistors = [
@@ -321,6 +331,7 @@ def componentMenus(event, mouse_pos, screen, ui_height, adding_comp, selected_co
                     name_text_color = HIGHLIGHT_TEXT_COLOR
                     name_text_font = font2
                     nameForClass = name.replace(" ", "_").replace(".", "")
+                    draw_component_info(nameForClass)
                 # Use the default font for dropdown menu text
                 name_text = name_text_font.render(name, True, name_text_color)
                 screen.blit(name_text, (dropdown_x + 105, name_y))
@@ -350,3 +361,24 @@ def save_component(saved_comp):
     print(saved_components)
     # Add the saved component to the saved_components list
     saved_components.append(saved_comp)
+
+def draw_component_info(nameForClass):
+    if nameForClass not in component_explanations:
+        return  # Component not recognized
+
+    # Dimensions and positioning
+    rect_width, rect_height = 300, 200
+    info_rect = pygame.Rect(0, 0, rect_width, rect_height)
+    info_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+    # Draw background
+    pygame.draw.rect(screen, pygame.Color("white"), info_rect)
+    pygame.draw.rect(screen, pygame.Color("black"), info_rect, 2)
+
+    # Display text
+    font = pygame.font.SysFont(None, 20)
+    explanations = component_explanations[nameForClass]
+    for i, line in enumerate(explanations):
+        rendered = font.render(line, True, pygame.Color("black"))
+        text_pos = (info_rect.x + 10, info_rect.y + 20 + i * 30)
+        screen.blit(rendered, text_pos)
