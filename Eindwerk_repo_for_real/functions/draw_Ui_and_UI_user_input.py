@@ -6,7 +6,7 @@ new_height2 = SCREEN_HEIGHT
 colors = [LIGHT_BLUE, GREEN, YELLOW, BROWN, RED, BLACK]
 rectangles = []
 
-x_start = SCREEN_WIDTH / 4.5  # Starting x position
+x_start = (SCREEN_WIDTH / 2) - 90  # Starting x position
 y_start = new_height - 50  # Fixed y position
 rect_width, rect_height = 20, 20  # Size of each rectangle
 spacing = 30  # Space between rectangles

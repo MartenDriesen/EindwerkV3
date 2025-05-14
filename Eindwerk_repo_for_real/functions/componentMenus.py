@@ -1,5 +1,5 @@
 import pygame
-from main.global_constants import WHITE, HIGHLIGHT_TEXT_COLOR, BLUETEXT, DROPDOWN_DELAY, font, font2, font3, font4, SCREEN_HEIGHT, SCREEN_WIDTH, screen
+from main.global_constants import DARKBLUE, WHITE, HIGHLIGHT_TEXT_COLOR, BLUETEXT, DROPDOWN_DELAY, font, font2, font3, font4, SCREEN_HEIGHT, SCREEN_WIDTH, screen
 # Initialize Pygame
 pygame.init()
 
@@ -372,13 +372,12 @@ def draw_component_info(nameForClass):
     info_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
     # Draw background
-    pygame.draw.rect(screen, pygame.Color("white"), info_rect)
-    pygame.draw.rect(screen, pygame.Color("black"), info_rect, 2)
+    pygame.draw.rect(screen, DARKBLUE, info_rect)
 
     # Display text
     font = pygame.font.SysFont(None, 20)
     explanations = component_explanations[nameForClass]
     for i, line in enumerate(explanations):
-        rendered = font.render(line, True, pygame.Color("black"))
+        rendered = font.render(line, True, WHITE)
         text_pos = (info_rect.x + 10, info_rect.y + 20 + i * 30)
         screen.blit(rendered, text_pos)

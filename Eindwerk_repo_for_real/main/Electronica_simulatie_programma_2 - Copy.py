@@ -8,11 +8,12 @@ if project_path not in sys.path:
     sys.path.append(project_path)
 
 from main.global_constants import *
+from functions.login import draw_login_register_menu, logout
 from functions.draw_virtual_grid import draw_virtual_grid
 from functions.componentMenus import componentMenus, save_component
 from functions.hide_component_menu import hide_component_menu
 from functions.feedback import get_feedback
-from functions.draw_Ui_and_UI_user_input import draw_Ui, select_connection_color, env_temp_function, env_light_function
+from functions.draw_Ui_and_UI_user_input import draw_Ui, select_connection_color
 from functions.placing_component import placing_component
 from functions.snap_to_grid import snap_to_grid, snap_to_virtual_grid
 from functions.check_comp_collision import check_component_collision
@@ -35,6 +36,7 @@ from functions.draw_bounding_rectangle import draw_bounding_rectangle
 from functions.Properties_menu import properties_menu, is_property_menu_open
 from functions.import_project import import_project
 from functions.update_component_name import update_component_name
+from functions.shortcuts import shortcuts
 
 from component_classes.Component import Component
 from component_classes.subConnection import subConnection
@@ -131,7 +133,7 @@ copied_component = None
 saved_component = None
 edit_component_props = None
 right_clicked_comp = None
-
+logged_user = None
 
 menu_is_open = False
 placed_comp_is_saved_comp = False
@@ -169,6 +171,7 @@ menu_is_open_check = False
 property_menu_is_open = False
 hovering_over_comp = False
 hand_cursor = False
+loggedout = False
 
 zoom_factor = 0
 camera_offset_x = 0
@@ -468,12 +471,13 @@ while running:
                 esc_button = False   
 
             if event.key == pygame.K_m:   
-                m_button = False                                                                                                   
+                m_button = False       
+
     
+
     if not menu_is_open:    
         selected_connection_color, hand_cursor = select_connection_color(mouse_pos, left_mouse_button, adding_component, hand_cursor)
-        env_temp, user_input_temp_bool, hand_cursor = env_temp_function(mouse_pos, left_mouse_button, env_temp, key_down_event, user_input_temp_bool, hand_cursor)
-        env_light, user_input_light_bool, hand_cursor = env_light_function(mouse_pos, left_mouse_button, env_light, key_down_event, user_input_light_bool, hand_cursor)
+
         hide_menu, hand_cursor = hide_component_menu(mouse_pos, left_mouse_button, hide_menu, hand_cursor)
         
         if dragged_component:  
@@ -653,7 +657,18 @@ while running:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW) 
         
     get_feedback(components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, left_mouse_button, key_down_event)
+    shortcuts(mouse_pos)
 
+    if not start_menu_is_open and not logged_user:
+        remember_hotzone_pos = None
+        mouse_in_hotzone = False                                                                                                       
+        logged_user = draw_login_register_menu(key_down_event, mouse_pos, left_mouse_button)
+    loggedout = logout(mouse_pos, left_mouse_button)
+
+    if loggedout:
+        logged_user = None
+        loggedout = False
+        
     hand_cursor = False     
 
     left_mouse_button = False 
@@ -661,6 +676,7 @@ while running:
     right_mouse_button = False
     key_down_event = None
 
+    
     # Update display
     pygame.display.flip()
 

@@ -1,5 +1,5 @@
 import pygame
-from main.global_constants import screen, SCREEN_WIDTH, SCREEN_HEIGHT, font2, font5
+from main.global_constants import screen, SCREEN_WIDTH, SCREEN_HEIGHT, font2, font5, DARKBLUE, WHITE
 
 # Global state
 feedback_checkbox_checked = False
@@ -14,7 +14,6 @@ CHECKBOX_POS = (15, SCREEN_HEIGHT - 110)
 INPUT_BOX_SIZE = (300, 30)
 
 BLUE = pygame.Color("#0199FF")
-WHITE = pygame.Color("white")
 BLACK = pygame.Color("black")
 
 def draw_checkbox(screen, checked):
@@ -36,15 +35,14 @@ def draw_input_box(screen, hovered_comp, event, mouse_pos, left_mouse_button):
 
     panel_width = 320
     panel_rect = pygame.Rect(SCREEN_WIDTH - panel_width, 0, panel_width, SCREEN_HEIGHT)
-    pygame.draw.rect(screen, WHITE, panel_rect)
-    pygame.draw.rect(screen, (0, 31, 56), panel_rect, 4)
+    pygame.draw.rect(screen, DARKBLUE, panel_rect)
 
     # Instruction
-    instruction = font2.render("Click in the box to add feedback.", True, BLACK)
+    instruction = font2.render("Click in the box to add feedback.", True, WHITE)
     screen.blit(instruction, (panel_rect.x + 10, panel_rect.y + 10))
 
     # Close Button
-    cross_img = pygame.image.load("./images/icons/Bluecross.png")
+    cross_img = pygame.image.load("./images/icons/cross.png")
     cross_img = pygame.transform.smoothscale(cross_img, (20, 20))
     cross_rect = cross_img.get_rect(topright=(SCREEN_WIDTH - 10, 10))
     screen.blit(cross_img, cross_rect)
@@ -59,9 +57,9 @@ def draw_input_box(screen, hovered_comp, event, mouse_pos, left_mouse_button):
     # Input Box
     input_box_height = 1000
     input_box = pygame.Rect(panel_rect.x + 10, panel_rect.y + 40, panel_width - 20, input_box_height)
-    input_bg_color = (230, 230, 230) if not feedback_input_active else (210, 210, 210)
-    pygame.draw.rect(screen, input_bg_color, input_box)
-    pygame.draw.rect(screen, (0, 31, 56), input_box, 2)
+    input_bg_color = (255, 255, 255) if not feedback_input_active else (0,0,255)
+    pygame.draw.rect(screen, DARKBLUE, input_box)
+    pygame.draw.rect(screen, input_bg_color, input_box, 2)
 
     # Click to activate
     if panel_rect.collidepoint(mouse_pos) and left_mouse_button:
@@ -87,7 +85,7 @@ def draw_input_box(screen, hovered_comp, event, mouse_pos, left_mouse_button):
 
     y_offset = 0
     for line in lines:
-        rendered = font2.render(line, True, BLACK)
+        rendered = font2.render(line, True, WHITE)
         screen.blit(rendered, (input_box.x + 5, input_box.y + 5 + y_offset))
         y_offset += rendered.get_height() + 2
 
