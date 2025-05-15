@@ -1,7 +1,7 @@
 import pygame
 from pymongo import MongoClient
 from main.global_constants import font, screen, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, LIGHT_BLUE, BLACK, BLUE, font2
-from dotenv import load_dotenv
+from functions.sync_user_groups import sync_user_groups
 import os
 
 # Load environment variables
@@ -132,31 +132,36 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
         user_input["name"] = ""
         user_input["password"] = ""
         status_message = ""
-    return logged_user["name"] if ok else None
+        sync_user_groups(logged_user)
+    return logged_user["username"] if ok else None
 
 def handle_register():
     global ok, logged_user
     if not user_input["name"] or not user_input["password"]:
         return "❌ Vul alle velden in"
     try:
-        existing = users_collection.find_one({"name": user_input["name"]})
+        existing = users_collection.find_one({"username": user_input["name"]})
         if existing:
             return "❌ Gebruiker bestaat al"
         users_collection.insert_one({
-            "name": user_input["name"],
+            "username": user_input["name"],
             "password": user_input["password"]
         })
     except Exception as e:
         return f"❌ Databasefout: {str(e)}"
-    logged_user = user_input.copy()
+    logged_user = {
+        "username": user_input["name"],
+        "password": user_input["password"]
+    }
     ok = True
     return "✅ Geregistreerd!"
+
 
 def handle_login():
     global logged_user, ok
 
     try:
-        user = users_collection.find_one({"name": user_input["name"]})
+        user = users_collection.find_one({"username": user_input["name"]})
         if not user:
             return "Gebruiker niet gevonden"
         elif user["password"] != user_input["password"]:
@@ -175,7 +180,7 @@ def logout(mouse_pos, mouse_click):
     global logged_user, ok
     logout_text = font2.render("Logout", True, WHITE)
 
-    logout_rect = logout_text.get_rect(topleft=(1300, 12))
+    logout_rect = logout_text.get_rect(topleft=(1300, 40))
     screen.blit(logout_text, logout_rect)
     if mouse_click and logout_rect.collidepoint(mouse_pos):
         logged_user = None
@@ -183,3 +188,8 @@ def logout(mouse_pos, mouse_click):
         return True
     return False
   
+def show_user(username):
+    if username:
+        user_text = font2.render(f"user: {username}", True, WHITE)
+        userrect = user_text.get_rect(topleft=(1400, 40))
+        screen.blit(user_text, userrect)

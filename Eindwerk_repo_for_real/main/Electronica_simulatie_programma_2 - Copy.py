@@ -8,7 +8,10 @@ if project_path not in sys.path:
     sys.path.append(project_path)
 
 from main.global_constants import *
-from functions.login import draw_login_register_menu, logout
+from functions.create_class import create_class
+from functions.sync_user_groups import sync_user_groups_button
+from functions.invitations import invitations, sendinvitation
+from functions.login import draw_login_register_menu, logout, show_user
 from functions.draw_virtual_grid import draw_virtual_grid
 from functions.componentMenus import componentMenus, save_component
 from functions.hide_component_menu import hide_component_menu
@@ -664,11 +667,16 @@ while running:
         mouse_in_hotzone = False                                                                                                       
         logged_user = draw_login_register_menu(key_down_event, mouse_pos, left_mouse_button)
     loggedout = logout(mouse_pos, left_mouse_button)
+    show_user(logged_user)
 
     if loggedout:
         logged_user = None
         loggedout = False
-        
+
+    invitations(mouse_pos, left_mouse_button, logged_user)
+    sendinvitation(mouse_pos, left_mouse_button, key_down_event, logged_user)
+    create_class(mouse_pos, left_mouse_button, logged_user)
+    sync_user_groups_button(logged_user, mouse_pos, left_mouse_button)
     hand_cursor = False     
 
     left_mouse_button = False 
