@@ -8,9 +8,8 @@ if project_path not in sys.path:
     sys.path.append(project_path)
 
 from main.global_constants import *
-from functions.create_class import create_class
-from functions.sync_user_groups import sync_user_groups_button
-from functions.invitations import invitations, sendinvitation
+from functions.invitations import invitations
+from functions.manage_classes_button import manage_classes_button
 from functions.login import draw_login_register_menu, logout, show_user
 from functions.draw_virtual_grid import draw_virtual_grid
 from functions.componentMenus import componentMenus, save_component
@@ -115,6 +114,8 @@ raw_offsets_comp = []
 raw_offsets_line = []
 timeline = []
 
+userdetails = None
+user_id = None
 wasFeedbackBlock = None
 feedbackBlockBool = None
 saved_comp = None
@@ -659,24 +660,25 @@ while running:
     else:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW) 
         
-    get_feedback(components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, left_mouse_button, key_down_event)
+   
     shortcuts(mouse_pos)
 
     if not start_menu_is_open and not logged_user:
         remember_hotzone_pos = None
         mouse_in_hotzone = False                                                                                                       
-        logged_user = draw_login_register_menu(key_down_event, mouse_pos, left_mouse_button)
+        userdetails = draw_login_register_menu(key_down_event, mouse_pos, left_mouse_button)
+        if userdetails != (None, None):
+            logged_user, user_id = userdetails
     loggedout = logout(mouse_pos, left_mouse_button)
     show_user(logged_user)
 
     if loggedout:
         logged_user = None
         loggedout = False
-
+        user_id = None
+    manage_classes_button(mouse_pos, left_mouse_button, user_id, key_down_event, logged_user)
     invitations(mouse_pos, left_mouse_button, logged_user)
-    sendinvitation(mouse_pos, left_mouse_button, key_down_event, logged_user)
-    create_class(mouse_pos, left_mouse_button, logged_user)
-    sync_user_groups_button(logged_user, mouse_pos, left_mouse_button)
+    get_feedback(components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, left_mouse_button, key_down_event)
     hand_cursor = False     
 
     left_mouse_button = False 
@@ -690,5 +692,5 @@ while running:
 
 # Quit Pygame
 pygame.quit()
-sys.exit() 
+sys.exit()
 

@@ -1,7 +1,6 @@
 import pygame
 from pymongo import MongoClient
 from main.global_constants import font, screen, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, LIGHT_BLUE, BLACK, BLUE, font2
-from functions.sync_user_groups import sync_user_groups
 import os
 
 # Load environment variables
@@ -127,13 +126,14 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
         elif login_rect.collidepoint(mouse_pos):
             status_message = handle_login()
 
-    # ✅ Return username if successful, else None
+    # ✅ Return username and user_id if successful, else None
     if ok:
         user_input["name"] = ""
         user_input["password"] = ""
         status_message = ""
-        sync_user_groups(logged_user)
-    return logged_user["username"] if ok else None
+        print(str(logged_user["_id"]))
+        return logged_user["username"], str(logged_user["_id"])
+    return None, None
 
 def handle_register():
     global ok, logged_user
@@ -143,23 +143,20 @@ def handle_register():
         existing = users_collection.find_one({"username": user_input["name"]})
         if existing:
             return "❌ Gebruiker bestaat al"
-        users_collection.insert_one({
+        result = users_collection.insert_one({
             "username": user_input["name"],
             "password": user_input["password"]
         })
+        # Fetch the inserted user with _id
+        logged_user = users_collection.find_one({"_id": result.inserted_id})
     except Exception as e:
         return f"❌ Databasefout: {str(e)}"
-    logged_user = {
-        "username": user_input["name"],
-        "password": user_input["password"]
-    }
     ok = True
     return "✅ Geregistreerd!"
 
 
 def handle_login():
     global logged_user, ok
-
     try:
         user = users_collection.find_one({"username": user_input["name"]})
         if not user:
