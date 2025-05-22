@@ -372,12 +372,12 @@ def draw_component_info(nameForClass):
     info_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
     # Draw background
-    pygame.draw.rect(screen, DARKBLUE, info_rect)
+    pygame.draw.rect(screen, DARKBLUE, info_rect, border_radius=5)
 
     # Display text
-    font = pygame.font.SysFont(None, 20)
+ 
     explanations = component_explanations[nameForClass]
     for i, line in enumerate(explanations):
-        rendered = font.render(line, True, WHITE)
-        text_pos = (info_rect.x + 10, info_rect.y + 20 + i * 30)
+        rendered = font2.render(line, True, WHITE)
+        text_pos = (info_rect.x + 20, info_rect.y + 20 + i * 30)
         screen.blit(rendered, text_pos)

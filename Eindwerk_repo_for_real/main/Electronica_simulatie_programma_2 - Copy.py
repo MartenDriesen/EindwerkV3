@@ -8,8 +8,9 @@ if project_path not in sys.path:
     sys.path.append(project_path)
 
 from main.global_constants import *
+
 from functions.invitations import invitations
-from functions.manage_classes_button import manage_classes_button
+from functions.manage_classes_button import manage_classes_button, upload_feedback
 from functions.login import draw_login_register_menu, logout, show_user
 from functions.draw_virtual_grid import draw_virtual_grid
 from functions.componentMenus import componentMenus, save_component
@@ -29,7 +30,7 @@ from functions.draw_selected_components_and_connections import draw_selected_com
 from functions.draw_existing_connections import draw_existing_connections
 from functions.clicked_on_component import clicked_on_component
 from functions.draw_collision_circles import draw_collision_circles
-from functions.save_load_projects import save_button, newFile, show_project_name, load_project, new_file_button, is_menu_open, save_as_button
+from functions.save_load_projects import save_button, newFile, show_project_name, load_project, new_file_button, is_menu_open, save_as_button, load_mongo_file
 from functions.scale_components_and_connections_based_on_zoom import scale_components_and_connections_based_on_zoom
 from functions.scale_newly_added_component import scale_newly_added_component
 from functions.cntrl_z_function import cntrl_z_function, timeline_cntrl_shift_z
@@ -127,6 +128,7 @@ dragged_component = None
 virtual_selecting_box = None
 loaded_components = None
 loaded_connections = None
+
 imported_components = None
 imported_connections = None
 comp_name = None
@@ -139,6 +141,7 @@ edit_component_props = None
 right_clicked_comp = None
 logged_user = None
 
+class_menu_open = False
 menu_is_open = False
 placed_comp_is_saved_comp = False
 left_mouse_button = False
@@ -610,13 +613,9 @@ while running:
     if not loaded_components and not loaded_connections:
         loaded_components, loaded_connections, hand_cursor = load_project(mouse_pos, left_mouse_button, components, connections, menu_is_open, hand_cursor)
     
-    if loaded_components or loaded_connections:
-        components = loaded_components
-        connections = loaded_connections
-        loaded_components = None
-        loaded_connections = None
-        timeline_cntrl_shift_z = []
-        timeline = []
+    
+
+
 
     if not hide_menu:    
         comp_name, saved_comp, hand_cursor = componentMenus(event ,mouse_pos, screen, new_height, adding_component, selected_comps_wires, dragged_component, virtual_selecting_box, menu_is_open, hand_cursor) 
@@ -676,9 +675,11 @@ while running:
         logged_user = None
         loggedout = False
         user_id = None
-    manage_classes_button(mouse_pos, left_mouse_button, user_id, key_down_event, logged_user)
+    class_menu_open, loaded_components, loaded_connections = manage_classes_button(mouse_pos, left_mouse_button, user_id, key_down_event, logged_user)
     invitations(mouse_pos, left_mouse_button, logged_user)
     get_feedback(components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, left_mouse_button, key_down_event)
+
+    upload_feedback(mouse_pos, left_mouse_button, components, connections)
     hand_cursor = False     
 
     left_mouse_button = False 
@@ -686,7 +687,17 @@ while running:
     right_mouse_button = False
     key_down_event = None
 
-    
+    if class_menu_open:
+        remember_hotzone_pos = None
+        mouse_in_hotzone = False  
+        
+    if loaded_components or loaded_connections:
+        components = loaded_components
+        connections = loaded_connections
+        loaded_components = None
+        loaded_connections = None
+        timeline_cntrl_shift_z = []
+        timeline = [] 
     # Update display
     pygame.display.flip()
 

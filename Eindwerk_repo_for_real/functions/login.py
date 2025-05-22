@@ -138,11 +138,11 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
 def handle_register():
     global ok, logged_user
     if not user_input["name"] or not user_input["password"]:
-        return "❌ Vul alle velden in"
+        return "❌ fill in all fields"
     try:
         existing = users_collection.find_one({"username": user_input["name"]})
         if existing:
-            return "❌ Gebruiker bestaat al"
+            return "❌ user already exists"
         result = users_collection.insert_one({
             "username": user_input["name"],
             "password": user_input["password"]
@@ -152,7 +152,7 @@ def handle_register():
     except Exception as e:
         return f"❌ Databasefout: {str(e)}"
     ok = True
-    return "✅ Geregistreerd!"
+    return "✅ registered!"
 
 
 def handle_login():
@@ -160,24 +160,24 @@ def handle_login():
     try:
         user = users_collection.find_one({"username": user_input["name"]})
         if not user:
-            return "Gebruiker niet gevonden"
+            return "user not found"
         elif user["password"] != user_input["password"]:
-            return "Fout wachtwoord"
+            return "wrong password"
     except Exception as e:
         print(e)
         return f"❌ Databasefout: {str(e)}"
         return "Gebruiker niet gevonden"
     if user["password"] != user_input["password"]:
-        return "Fout wachtwoord"
+        return "wrong password"
     logged_user = user
     ok = True
-    return "✅ Ingelogd!"
+    return "✅ logged in!"
 
 def logout(mouse_pos, mouse_click):
     global logged_user, ok
     logout_text = font2.render("Logout", True, WHITE)
 
-    logout_rect = logout_text.get_rect(topleft=(1300, 40))
+    logout_rect = logout_text.get_rect(topleft=(1300, 12))
     screen.blit(logout_text, logout_rect)
     if mouse_click and logout_rect.collidepoint(mouse_pos):
         logged_user = None
@@ -188,5 +188,5 @@ def logout(mouse_pos, mouse_click):
 def show_user(username):
     if username:
         user_text = font2.render(f"user: {username}", True, WHITE)
-        userrect = user_text.get_rect(topleft=(1400, 40))
+        userrect = user_text.get_rect(topleft=(1400, 12))
         screen.blit(user_text, userrect)

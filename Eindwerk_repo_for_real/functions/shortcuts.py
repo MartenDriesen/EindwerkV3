@@ -12,11 +12,11 @@ def shortcuts(mouse_pos):
     # --- Hover check ---
     if save_rect.collidepoint(mouse_pos):
         # Draw info panel
-        panel_width, panel_height = 400, 500
+        panel_width, panel_height = 400, 400
         panel_rect = pygame.Rect(0, 0, panel_width, panel_height)
         panel_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
-        pygame.draw.rect(screen, DARKBLUE, panel_rect)
+        pygame.draw.rect(screen, DARKBLUE, panel_rect, border_radius=5)
 
         # Display shortcut text
         shortcuts_list = [
@@ -26,7 +26,8 @@ def shortcuts(mouse_pos):
             "Delete: Delete (delete selected component)", 
             "Ctrl + C: Copy",
             "Ctrl + V: Paste",
-            "hold shift to drag camera"
+            "hold shift to drag camera",
+            "Ctrl + scroll: zoom in/out",
         ]
 
         text_y = panel_rect.y + 20

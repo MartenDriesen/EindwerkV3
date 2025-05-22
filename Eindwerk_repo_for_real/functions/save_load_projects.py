@@ -403,7 +403,7 @@ def load_project(mouse_pos, left_mouse_button, current_components, current_conne
     # Render load button
     load = "load file"
     load_text = font2.render(load, True, WHITE)
-    load_text_rect = pygame.Rect(350, 12, 80, 30)  # Adjusted rect size to fit "load file"
+    load_text_rect = pygame.Rect(330, 12, 80, 30)  # Adjusted rect size to fit "load file"
     screen.blit(load_text, load_text_rect)
 
     # Check for mouse click on load button
@@ -711,5 +711,112 @@ def saving_file_notification():
 
 def is_menu_open():
     return menu_is_open
+
+def load_mongo_file(file_content, file_name):
+    global projectname
+    print(file_content)
+    """ 
+    Given a string (the content of a .pl file from MongoDB), parse and return (components, connections).
+    """
+    from uuid import UUID
+    # Define the registry of component classes (reuse from load_file_explorer)
+    component_classes = {
+        "AC_Motor": AC_Motor,
+        "DC_Motor": DC_Motor,
+        "Capacitor": Capacitor,
+        "Current_Meter": Current_Meter,
+        "AC_Voltage_Src": AC_Voltage_Src,
+        "DC_Voltage_Src": DC_Voltage_Src,
+        "Diode": Diode,
+        "Fuse": Fuse,
+        "IGBT_N_Channel": IGBT_N_Channel,
+        "IGBT_P_Channel": IGBT_P_Channel,
+        "Inductor": Inductor,
+        "JFET_N_Channel": JFET_N_Channel,
+        "JFET_P_Channel": JFET_P_Channel,
+        "LDR": LDR,
+        "LED": LED,
+        "MOSFET_N_Depl": MOSFET_N_Depl,
+        "MOSFET_N_Enhance": MOSFET_N_Enhance,
+        "MOSFET_P_Depl": MOSFET_P_Depl,
+        "MOSFET_P_Enhance": MOSFET_P_Enhance,
+        "Normally_Open_Switch": Normally_Open_Switch,
+        "Normally_Closed_Switch": Normally_Closed_Switch,
+        "NPN_Transistor": NPN_Transistor,
+        "PNP_Transistor": PNP_Transistor,
+        "Polar_Capacitor": Polar_Capacitor,
+        "Potentiometer": Potentiometer,
+        "Battery": Battery,
+        "Normally_Open_Relay": Normally_Open_Relay,
+        "Normally_Closed_Relay": Normally_Closed_Relay,
+        "Resistor": Resistor,
+        "Schottky_Diode": Schottky_Diode,
+        "SCR": SCR,
+        "Thermistor": Thermistor,
+        "Transformer": Transformer,
+        "Triac": Triac,
+        "Var_Capacitor": Var_Capacitor,
+        "Var_Inductor": Var_Inductor,
+        "Var_Polar_Capacitor": Var_Polar_Capacitor,
+        "Varistor": Varistor,
+        "Volt_Meter": Volt_Meter,
+        "Power_Meter": Power_Meter,
+        "Zener_Diode": Zener_Diode,
+        "Three_Phase_Motor_Delta": Three_Phase_Motor_Delta,
+        "Three_Phase_Motor_Star": Three_Phase_Motor_Star,
+        "Three_Phase_Power_Src": Three_Phase_Power_Src,
+        "Ground": Ground,
+        "Photo_Diode": Photo_Diode,
+        "Teleruptor": Teleruptor,
+        "Three_Way_Switch": Three_Way_Switch,
+        "Four_Way_Switch": Four_Way_Switch,
+        "SPS_Open": SPS_Open,
+        "DPST": DPST,
+        "DPST_Open": DPST_Open,
+        "SPST": SPST,
+        "TPST_Open": TPST_Open,
+        "Staircase_Timer_Auto": Staircase_Timer_Auto,
+        "Circuit_Breaker": Circuit_Breaker,
+        "feedbackBlock": feedbackBlock,
+        "Connection": Connection
+    }
+    try:
+        import json
+        data = json.loads(file_content)
+        # If the filename is present in the data, update projectname and show it
+
+        projectname = file_name
+        show_project_name()
+ 
+        loaded_components_data = data[0]
+        loaded_connections_data = data[1]
+        print(loaded_connections_data,loaded_components_data )
+        loaded_components = []
+        for comp_data in loaded_components_data:
+            class_name = comp_data.get('class_name')
+            component_class = component_classes.get(class_name)
+            if component_class is None:
+                continue
+            component = component_class()
+            for key, value in comp_data.items():
+                if key == 'id':
+                    value = UUID(value)
+                if key != 'class_name':
+                    setattr(component, key, value)
+            loaded_components.append(component)
+        loaded_connections = []
+        for conn_data in loaded_connections_data:
+            connection = subConnection()
+            for key, value in conn_data.items():
+                if key == 'id':
+                    value = UUID(value)
+                setattr(connection, key, value)
+            loaded_connections.append(connection)
+        # Always return the tuple (components, connections)
+        print(loaded_components, loaded_connections )
+        return loaded_components, loaded_connections
+    except Exception as e:
+        print(f"Failed to load mongo file: {e}")
+        return [], []
 
 

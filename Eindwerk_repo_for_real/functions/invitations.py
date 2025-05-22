@@ -1,5 +1,5 @@
 import pygame
-from main.global_constants import WHITE, font2, screen, DARKBLUE, BLUE
+from main.global_constants import WHITE, font2, screen, DARKBLUE, BLUE, font6
 from pymongo import MongoClient
 
 client = MongoClient("mongodb+srv://marten2:123@powerlink-cluster.crculel.mongodb.net/?retryWrites=true&w=majority&appName=Powerlink-cluster")
@@ -13,14 +13,22 @@ def invitations(mouse_pos, left_mouse_button, current_user):
     global draw_invitations_panel
 
     invitations_text = font2.render("Invitations", True, WHITE)
-    invitationsrect = invitations_text.get_rect(topleft=(1300, 12))
+    invitationsrect = invitations_text.get_rect(topleft=(1200, 12))
     screen.blit(invitations_text, invitationsrect)
+
+    # Show pending invite count in small red font, 3px left/top of "Invitations"
+    pending_count = db["invites"].count_documents({"to": current_user})
+    if pending_count > 0:
+ 
+        count_text = font2.render(str(pending_count), True, (255, 0, 0))
+        count_rect = count_text.get_rect(left=invitationsrect.right + 3, top=invitationsrect.top - 3)
+        screen.blit(count_text, count_rect)
 
     if invitationsrect.collidepoint(mouse_pos) and left_mouse_button:
         draw_invitations_panel = True
 
     if draw_invitations_panel:
-        panel_rect = pygame.Rect(1150, 30, 250, 300)
+        panel_rect = pygame.Rect(1150, 90, 320, 300)
         pygame.draw.rect(screen, DARKBLUE, panel_rect, border_radius=5)
 
         # Close (X) icon
@@ -36,20 +44,24 @@ def invitations(mouse_pos, left_mouse_button, current_user):
         # Load and display invites (from 'invites' collection)
         invites = list(db["invites"].find({"to": current_user}))[:5]
         for i, invite in enumerate(invites):
-            y = panel_rect.y + 30 + i * 60
-            group_text = font2.render(f"{invite['from']} invited you to", True, WHITE)
-
+            # --- One line layout ---
+            y = panel_rect.y + 30 + i * 45  # reduce vertical spacing for compactness
             # Get the class name from the classes collection
             class_doc = db["classes"].find_one({"_id": invite["class_id"]})
             class_name_str = class_doc["name"] if class_doc else "Unknown Class"
+            # Compose invitation string
+            invite_str = f"{invite['from']} invited you to {class_name_str}"
+            invite_text = font2.render(invite_str, True, WHITE)
+            invite_text_rect = invite_text.get_rect()
+            invite_text_rect.topleft = (panel_rect.x + 10, y)
 
-            class_text = font2.render(class_name_str, True, WHITE)
+            # Button positions: right of text, with small spacing
+            btn_y = y
+            ok_rect = pygame.Rect(invite_text_rect.right + 10, btn_y, 40, 25)
+            x_rect = pygame.Rect(ok_rect.right + 10, btn_y, 40, 25)
 
-            screen.blit(group_text, (panel_rect.x + 10, y))
-            screen.blit(class_text, (panel_rect.x + 10, y + 20))
-
-            ok_rect = pygame.Rect(panel_rect.x + 10, y + 40, 40, 20)
-            x_rect = pygame.Rect(panel_rect.x + 60, y + 40, 40, 20)
+            # Draw everything
+            screen.blit(invite_text, invite_text_rect)
             pygame.draw.rect(screen, BLUE, ok_rect, border_radius=5)
             pygame.draw.rect(screen, (200, 50, 50), x_rect, border_radius=5)
             screen.blit(font2.render("OK", True, WHITE), (ok_rect.x + 5, ok_rect.y))
