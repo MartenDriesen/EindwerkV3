@@ -30,7 +30,8 @@ file_doc = None  # Track the file document for upload
 # Invite input state
 invite_input_active = False
 invite_input_text = ""
-selected_class_name = "..."  # Track selected class name for displaying tasks
+selected_class_name = "..."
+open_enabled = False# Track selected class name for displaying tasks
 
 # Add repo input state
 addrepo_input_active = False
@@ -57,7 +58,7 @@ def get_classes_user_is_member_of(user_id):
     return list(db.classes.find({"members": ObjectId(user_id)}))
 
 def manage_classes_button(mouse_pos, left_mouse_button, user_id, event, username):
-    global panel_open, input_active, input_text, input_box, selected_class_id
+    global panel_open, input_active, input_text, input_box, selected_class_id, open_enabled
     global cached_classes, classes_need_refresh, remove_answer, files, selected_class_name
     global invite_input_active, invite_input_text, file_delete_answer, selected_file
     global addrepo_input_active, addrepo_input_text, repo_delete_answer, selectedrepo
@@ -74,7 +75,7 @@ def manage_classes_button(mouse_pos, left_mouse_button, user_id, event, username
             elif ObjectId(user_id) in selected_class_doc.get("members", []):
                 selected_class_role = "member"
 
-    manage_text = font2.render("manage classes", True, WHITE)
+    manage_text = font2.render("classes", True, WHITE)
     managerect = manage_text.get_rect(topleft=(1050, 12))
     screen.blit(manage_text, managerect)
 
@@ -631,9 +632,10 @@ def manage_classes_button(mouse_pos, left_mouse_button, user_id, event, username
         screen.blit(upload_text, (uploadfile_rect.x + 5, uploadfile_rect.y + 5))
 
         # --- Open button logic ---
-        open_enabled = (
-            selected_file and selectedrepo and file_doc and file_doc.get("uploader") == username
-        )  # Only enable if file selected and uploader is current user
+        if selected_file:
+            open_enabled = True
+        else:
+            open_enabled = False
         open_btn_color = BLUE if open_enabled else LIGHT_GRAY
         pygame.draw.rect(screen, open_btn_color, open_rect, border_radius=5)
         screen.blit(open_text, (open_rect.x + 5, open_rect.y + 5))

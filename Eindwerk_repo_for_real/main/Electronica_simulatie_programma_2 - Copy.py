@@ -9,6 +9,7 @@ if project_path not in sys.path:
 
 from main.global_constants import *
 
+from functions.logo import logo
 from functions.invitations import invitations
 from functions.manage_classes_button import manage_classes_button, upload_feedback
 from functions.login import draw_login_register_menu, logout, show_user
@@ -611,9 +612,16 @@ while running:
         imported_connections = None
                  
     if not loaded_components and not loaded_connections:
+        
         loaded_components, loaded_connections, hand_cursor = load_project(mouse_pos, left_mouse_button, components, connections, menu_is_open, hand_cursor)
-    
-    
+
+        if loaded_components or loaded_connections:
+            components = loaded_components
+            connections = loaded_connections
+            loaded_components = None
+            loaded_connections = None
+            timeline_cntrl_shift_z = []
+            timeline = [] 
 
 
 
@@ -680,6 +688,7 @@ while running:
     get_feedback(components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, left_mouse_button, key_down_event)
 
     upload_feedback(mouse_pos, left_mouse_button, components, connections)
+    logo()
     hand_cursor = False     
 
     left_mouse_button = False 

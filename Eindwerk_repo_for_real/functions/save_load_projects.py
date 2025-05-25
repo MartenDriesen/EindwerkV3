@@ -108,7 +108,7 @@ def newFile(mouse_pos, left_mouse_button, current_components, current_connection
     # Text strings
     new_project = "New file"
     load_project = "Load file"
-    powerlink = "Powerlink"
+    powerlink = "Welcome to Powerlink"
 
     # Render text
     new_project_text = font2.render(new_project, True, WHITE)
@@ -677,6 +677,7 @@ def load_file_explorer(current_components, current_connections):
     except Exception as e:
         print(f"Failed to load project: {e}")
     # Return the loaded data, whether successful or not
+    
     return loaded_components, loaded_connections
 
 start_timer = None

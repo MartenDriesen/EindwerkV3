@@ -28,6 +28,10 @@ def shortcuts(mouse_pos):
             "Ctrl + V: Paste",
             "hold shift to drag camera",
             "Ctrl + scroll: zoom in/out",
+            "Ctrl + A: select all",
+            "R: rotate selected"
+            "escape: stop drawing line"
+            
         ]
 
         text_y = panel_rect.y + 20

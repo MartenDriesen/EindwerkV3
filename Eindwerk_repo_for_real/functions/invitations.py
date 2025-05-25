@@ -13,7 +13,7 @@ def invitations(mouse_pos, left_mouse_button, current_user):
     global draw_invitations_panel
 
     invitations_text = font2.render("Invitations", True, WHITE)
-    invitationsrect = invitations_text.get_rect(topleft=(1200, 12))
+    invitationsrect = invitations_text.get_rect(topleft=(1140, 12))
     screen.blit(invitations_text, invitationsrect)
 
     # Show pending invite count in small red font, 3px left/top of "Invitations"

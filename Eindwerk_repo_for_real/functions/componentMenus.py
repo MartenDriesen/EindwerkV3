@@ -24,13 +24,266 @@ def load_and_scale_image(image_path, max_width, max_height):
 saved_components = []
 
 component_explanations = {
-    "Resistor": ["Resists current flow.", "Used in voltage division.", "Basic passive component."],
-    "Varistor": ["Voltage-dependent resistor.", "Protects from surges.", "Non-linear resistance."],
-    "Thermistor": ["Temperature-sensitive resistor.", "NTC or PTC types.", "Used in sensors."],
-    "Capacitor": ["Stores electric charge.", "Used for filtering.", "Two conductive plates."],
-    "Diode": ["Allows current in one direction.", "Used in rectifiers.", "Has a forward voltage."],
-    "LED": ["Light Emitting Diode.", "Needs current limiting.", "Used in displays."],
-    # Add more as needed...
+     "Resistor": [
+        "Resists current flow.",
+        "Used in voltage division.",
+        "Basic passive component."
+    ],
+    "Varistor": [
+        "Voltage-dependent resistor.",
+        "Protects from surges.",
+        "Non-linear resistance."
+    ],
+    "Thermistor": [
+        "Temperature-sensitive resistor.",
+        "NTC or PTC types.",
+        "Used in sensors."
+    ],
+    "Capacitor": [
+        "Stores electric charge.",
+        "Used for filtering.",
+        "Two conductive plates."
+    ],
+    "Variable Capacitor": [
+        "Adjustable capacitance.",
+        "Used in tuning circuits.",
+        "Rotating plates."
+    ],
+    "Polarized Capacitor": [
+        "Has polarity (e.g., electrolytic).",
+        "Higher capacitance values.",
+        "Used in DC circuits."
+    ],
+    "Variable Polarized Capacitor": [
+        "Polarized with adjustable value.",
+        "Rare component type.",
+        "Specialized tuning uses."
+    ],
+    "Diode": [
+        "Allows current in one direction.",
+        "Used in rectifiers.",
+        "Has a forward voltage."
+    ],
+    "Schottky Diode": [
+        "Low forward voltage drop.",
+        "Fast switching.",
+        "Used in power circuits."
+    ],
+    "Zener Diode": [
+        "Allows reverse current at breakdown.",
+        "Used for voltage regulation.",
+        "Sharp breakdown voltage."
+    ],
+    "LED": [
+        "Light Emitting Diode.",
+        "Needs current limiting.",
+        "Used in displays."
+    ],
+    "Photo Diode": [
+        "Light-sensitive diode.",
+        "Generates current with light.",
+        "Used in sensors."
+    ],
+    "Inductor": [
+        "Stores energy in magnetic field.",
+        "Opposes change in current.",
+        "Coil of wire."
+    ],
+    "Variable Inductor": [
+        "Adjustable inductance.",
+        "Used in RF circuits.",
+        "Ferrite or air core."
+    ],
+    "Battery": [
+        "DC power source.",
+        "Stores chemical energy.",
+        "Used in portable devices."
+    ],
+    "DC Voltage Source": [
+        "Constant voltage supply.",
+        "Polarity sensitive.",
+        "Used in electronics."
+    ],
+    "AC Voltage Source": [
+        "Alternating current supply.",
+        "Polarity alternates.",
+        "Used in power systems."
+    ],
+    "Three Phase Power Source": [
+        "Three AC waveforms.",
+        "Used in industrial power.",
+        "Balanced load supply."
+    ],
+    "NPN Transistor": [
+        "Current amplifier.",
+        "Controlled by base current.",
+        "Common in switching."
+    ],
+    "PNP Transistor": [
+        "Like NPN but reversed.",
+        "Base current flows out.",
+        "Less common in logic."
+    ],
+    "MOSFET N Channel (Depletion)": [
+        "Normally on device.",
+        "Needs negative gate voltage to turn off.",
+        "Fast switching."
+    ],
+    "MOSFET N Channel (Enhancement)": [
+        "Normally off device.",
+        "Needs positive gate voltage to turn on.",
+        "Used in logic circuits."
+    ],
+    "MOSFET P Channel (Depletion)": [
+        "Normally on device.",
+        "Gate voltage turns it off.",
+        "Rarely used."
+    ],
+    "MOSFET P Channel (Enhancement)": [
+        "Normally off device.",
+        "Gate voltage turns it on.",
+        "Used with N-channel pairs."
+    ],
+    "JFET N Channel": [
+        "Voltage-controlled resistor.",
+        "Used in amplifiers.",
+        "High input impedance."
+    ],
+    "JFET P Channel": [
+        "Like N-channel but reversed.",
+        "Voltage controls channel.",
+        "Analog signal applications."
+    ],
+    "IGBT N Channel": [
+        "Combines MOSFET & BJT.",
+        "High efficiency switching.",
+        "Used in power electronics."
+    ],
+    "IGBT P Channel": [
+        "Rare variant of IGBT.",
+        "Positive gate control.",
+        "Similar use as N-type."
+    ],
+    "SCR": [
+        "Silicon Controlled Rectifier.",
+        "Triggered diode switch.",
+        "Used in power control."
+    ],
+    "Triac": [
+        "Bidirectional SCR.",
+        "Used in AC control.",
+        "Triggers on both cycles."
+    ],
+    "DC Motor": [
+        "Rotates with DC power.",
+        "Speed controlled by voltage.",
+        "Used in robotics."
+    ],
+    "AC Motor": [
+        "Runs on AC power.",
+        "Reliable and efficient.",
+        "Used in appliances."
+    ],
+    "Three Phase Motor Delta": [
+        "Delta-wired AC motor.",
+        "High power application.",
+        "Industrial machinery."
+    ],
+    "Three Phase Motor Star": [
+        "Star-wired AC motor.",
+        "Lower startup current.",
+        "Used in automation."
+    ],
+    "Volt Meter": [
+        "Measures voltage.",
+        "Connects in parallel.",
+        "Analog or digital."
+    ],
+    "Current Meter": [
+        "Measures current.",
+        "Connects in series.",
+        "Also called ammeter."
+    ],
+    "Ohm Meter": [
+        "Measures resistance.",
+        "Uses internal battery.",
+        "Part of multimeter."
+    ],
+    "Power Meter": [
+        "Measures power usage.",
+        "Displays watts.",
+        "Used in energy audits."
+    ],
+    "Fuse": [
+        "Overcurrent protection.",
+        "Melts when overloaded.",
+        "One-time protection."
+    ],
+    "Normally Open Relay": [
+        "Electromagnetic switch.",
+        "Closes when energized.",
+        "Used for automation."
+    ],
+    "SPS Open": [
+        "Single pole switch open.",
+        "Breaks one connection.",
+        "Manual or automated."
+    ],
+    "DPST Open": [
+        "Double pole switch open.",
+        "Breaks two circuits.",
+        "Used in mains switching."
+    ],
+    "TPST Open": [
+        "Triple pole switch open.",
+        "Three independent contacts.",
+        "Used in 3-phase systems."
+    ],
+    "SPST": [
+        "Single Pole Single Throw.",
+        "Basic on/off switch.",
+        "Used in simple circuits."
+    ],
+    "DPST": [
+        "Double Pole Single Throw.",
+        "Switches two lines together.",
+        "Isolates both wires."
+    ],
+    "Teleruptor": [
+        "Pulse-controlled switch.",
+        "Used in stairwell lighting.",
+        "Maintains state after pulse."
+    ],
+    "Three Way Switch": [
+        "Controls light from two locations.",
+        "Used in staircases.",
+        "Has three terminals."
+    ],
+    "Four Way Switch": [
+        "Works with 3-way switches.",
+        "Controls light from 3+ locations.",
+        "Intermediate switch."
+    ],
+    "Staircase Timer Auto": [
+        "Automatic delay-off timer.",
+        "Common in stairwell lights.",
+        "Saves energy."
+    ],
+    "Circuit Breaker": [
+        "Resettable overcurrent protection.",
+        "Trips on fault.",
+        "Safer than fuses."
+    ],
+    "Transformer": [
+        "Transfers AC power between circuits.",
+        "Steps voltage up/down.",
+        "Uses electromagnetic induction."
+    ],
+    "Ground": [
+        "Reference voltage point.",
+        "Safety connection.",
+        "Used in all circuits."
+    ]
 }
 
 componentsMenu = [
