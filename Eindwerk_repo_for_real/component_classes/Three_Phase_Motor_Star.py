@@ -7,11 +7,7 @@ class Three_Phase_Motor_Star(Component):
         self.pos_pin2 = None
         self.pos_pin3 = None
         self.pos_pin4 = None
-        self.name = "S"
+        self.name = "M"
         self.properties = [
-            ["Ohm", 0],       # Resistance in ohms
-            ["Voltage", 2],   # Voltage in volts
-            ["Amps", 0],       # Current in amps
-            ["mapa", 0],
-            ["patat", 0] 
+            ["rpm", 0]
         ]

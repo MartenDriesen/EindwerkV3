@@ -6,7 +6,7 @@ class Three_Phase_Motor_Delta(Component):
         self.pos_pin1 = None
         self.pos_pin2 = None
         self.pos_pin3 = None
-        self.name = "S"
+        self.name = "M"
         self.properties = [
-            ["Voltage", 0],            
+            ["rpm", 0],            
         ]

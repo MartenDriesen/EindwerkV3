@@ -7,10 +7,10 @@ first_input = True
 menu_is_open = False
 border_draw_time = None
 time_for_red_box = 0
-
+input_selected = None
 def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cursor):
     global component, active_field, first_input, menu_is_open, border_draw_time, time_for_red_box
-
+    global active_field, input_selected
     menu_is_open = True
     component = new_component
     mouse_x, mouse_y = mouse_pos
@@ -19,6 +19,9 @@ def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cur
     properties_menu_image = pygame.image.load("./images/menus/properties.png")
     properties_menu_image = pygame.transform.smoothscale(properties_menu_image, (350, 245))
 
+    if not input_selected:
+        active_field = component.properties[0][0]
+        input_selected = True
     # Text strings
     place = "Place"
     place_and_save_component = "Place & Save Component"
@@ -48,11 +51,11 @@ def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cur
     # Red rectangle logic
     draw_red_rect = False
     if event:
-        if event.key == pygame.K_RETURN:
+        if event.key == pygame.K_RETURN or event.key == pygame.K_ESCAPE:
             component.edited = True
             menu_is_open = False
             print("event")
-            return 0, hand_cursor  # Close the menu and place the component
+            return 1, hand_cursor  # Close the menu and place the component
 
     if time_for_red_box == 0:
         time_for_red_box = pygame.time.get_ticks()
@@ -100,9 +103,9 @@ def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cur
     
     input_fields = []
     # Set the first input field to active if first_input is True
-    if first_input:
-        active_field = component.properties[0][0]  # Set active_field to the name of the first property
-        first_input = False
+    
+      # Set active_field to the name of the first property
+
 
     for i, (prop_name, value) in enumerate(component.properties):
     # Determine the column (0 for left, 1 for right) and row

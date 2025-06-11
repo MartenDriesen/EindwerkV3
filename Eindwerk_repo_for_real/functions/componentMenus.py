@@ -44,17 +44,17 @@ component_explanations = {
         "Used for filtering.",
         "Two conductive plates."
     ],
-    "Variable Capacitor": [
+    "Variable_Capacitor": [
         "Adjustable capacitance.",
         "Used in tuning circuits.",
         "Rotating plates."
     ],
-    "Polarized Capacitor": [
+    "Polarized_Capacitor": [
         "Has polarity (e.g., electrolytic).",
         "Higher capacitance values.",
         "Used in DC circuits."
     ],
-    "Variable Polarized Capacitor": [
+    "Variable_Polarized_Capacitor": [
         "Polarized with adjustable value.",
         "Rare component type.",
         "Specialized tuning uses."
@@ -64,12 +64,12 @@ component_explanations = {
         "Used in rectifiers.",
         "Has a forward voltage."
     ],
-    "Schottky Diode": [
+    "Schottky_Diode": [
         "Low forward voltage drop.",
         "Fast switching.",
         "Used in power circuits."
     ],
-    "Zener Diode": [
+    "Zener_Diode": [
         "Allows reverse current at breakdown.",
         "Used for voltage regulation.",
         "Sharp breakdown voltage."
@@ -79,7 +79,7 @@ component_explanations = {
         "Needs current limiting.",
         "Used in displays."
     ],
-    "Photo Diode": [
+    "Photo_Diode": [
         "Light-sensitive diode.",
         "Generates current with light.",
         "Used in sensors."
@@ -89,7 +89,7 @@ component_explanations = {
         "Opposes change in current.",
         "Coil of wire."
     ],
-    "Variable Inductor": [
+    "Variable_Inductor": [
         "Adjustable inductance.",
         "Used in RF circuits.",
         "Ferrite or air core."
@@ -99,67 +99,67 @@ component_explanations = {
         "Stores chemical energy.",
         "Used in portable devices."
     ],
-    "DC Voltage Source": [
+    "DC_Voltage_Source": [
         "Constant voltage supply.",
         "Polarity sensitive.",
         "Used in electronics."
     ],
-    "AC Voltage Source": [
+    "AC_Voltage_Source": [
         "Alternating current supply.",
         "Polarity alternates.",
         "Used in power systems."
     ],
-    "Three Phase Power Source": [
+    "Three_Phase_Power_Source": [
         "Three AC waveforms.",
         "Used in industrial power.",
         "Balanced load supply."
     ],
-    "NPN Transistor": [
+    "NPN_Transistor": [
         "Current amplifier.",
         "Controlled by base current.",
         "Common in switching."
     ],
-    "PNP Transistor": [
+    "PNP_Transistor": [
         "Like NPN but reversed.",
         "Base current flows out.",
         "Less common in logic."
     ],
-    "MOSFET N Channel (Depletion)": [
+    "MOSFET_N_Channel_Depletion_type": [
         "Normally on device.",
         "Needs negative gate voltage to turn off.",
         "Fast switching."
     ],
-    "MOSFET N Channel (Enhancement)": [
+    "MOSFET_N_Channel_Enhancement_type": [
         "Normally off device.",
         "Needs positive gate voltage to turn on.",
         "Used in logic circuits."
     ],
-    "MOSFET P Channel (Depletion)": [
+    "MOSFET_P_Channel_Depletion_type": [
         "Normally on device.",
         "Gate voltage turns it off.",
         "Rarely used."
     ],
-    "MOSFET P Channel (Enhancement)": [
+    "MOSFET_P_Channel_Enhancement_type": [
         "Normally off device.",
         "Gate voltage turns it on.",
         "Used with N-channel pairs."
     ],
-    "JFET N Channel": [
+    "JFET_N_Channel": [
         "Voltage-controlled resistor.",
         "Used in amplifiers.",
         "High input impedance."
     ],
-    "JFET P Channel": [
+    "JFET_P_Channel": [
         "Like N-channel but reversed.",
         "Voltage controls channel.",
         "Analog signal applications."
     ],
-    "IGBT N Channel": [
+    "IGBT_N_Channel": [
         "Combines MOSFET & BJT.",
         "High efficiency switching.",
         "Used in power electronics."
     ],
-    "IGBT P Channel": [
+    "IGBT_P_Channel": [
         "Rare variant of IGBT.",
         "Positive gate control.",
         "Similar use as N-type."
@@ -174,42 +174,42 @@ component_explanations = {
         "Used in AC control.",
         "Triggers on both cycles."
     ],
-    "DC Motor": [
+    "DC_Motor": [
         "Rotates with DC power.",
         "Speed controlled by voltage.",
         "Used in robotics."
     ],
-    "AC Motor": [
+    "AC_Motor": [
         "Runs on AC power.",
         "Reliable and efficient.",
         "Used in appliances."
     ],
-    "Three Phase Motor Delta": [
+    "Three_Phase_Motor_Delta": [
         "Delta-wired AC motor.",
         "High power application.",
         "Industrial machinery."
     ],
-    "Three Phase Motor Star": [
+    "Three_Phase_Motor_Star": [
         "Star-wired AC motor.",
         "Lower startup current.",
         "Used in automation."
     ],
-    "Volt Meter": [
+    "Volt_Meter": [
         "Measures voltage.",
         "Connects in parallel.",
         "Analog or digital."
     ],
-    "Current Meter": [
+    "Current_Meter": [
         "Measures current.",
         "Connects in series.",
         "Also called ammeter."
     ],
-    "Ohm Meter": [
+    "Ohm_Meter": [
         "Measures resistance.",
         "Uses internal battery.",
         "Part of multimeter."
     ],
-    "Power Meter": [
+    "Power_Meter": [
         "Measures power usage.",
         "Displays watts.",
         "Used in energy audits."
@@ -219,22 +219,22 @@ component_explanations = {
         "Melts when overloaded.",
         "One-time protection."
     ],
-    "Normally Open Relay": [
+    "Normally_Open_Relay": [
         "Electromagnetic switch.",
         "Closes when energized.",
         "Used for automation."
     ],
-    "SPS Open": [
+    "SPS_Open": [
         "Single pole switch open.",
         "Breaks one connection.",
         "Manual or automated."
     ],
-    "DPST Open": [
+    "DPST_Open": [
         "Double pole switch open.",
         "Breaks two circuits.",
         "Used in mains switching."
     ],
-    "TPST Open": [
+    "TPST_Open": [
         "Triple pole switch open.",
         "Three independent contacts.",
         "Used in 3-phase systems."
@@ -254,22 +254,22 @@ component_explanations = {
         "Used in stairwell lighting.",
         "Maintains state after pulse."
     ],
-    "Three Way Switch": [
+    "Three_Way_Switch": [
         "Controls light from two locations.",
         "Used in staircases.",
         "Has three terminals."
     ],
-    "Four Way Switch": [
+    "Four_Way_Switch": [
         "Works with 3-way switches.",
         "Controls light from 3+ locations.",
         "Intermediate switch."
     ],
-    "Staircase Timer Auto": [
+    "Staircase_Timer_Auto": [
         "Automatic delay-off timer.",
         "Common in stairwell lights.",
         "Saves energy."
     ],
-    "Circuit Breaker": [
+    "Circuit_Breaker": [
         "Resettable overcurrent protection.",
         "Trips on fault.",
         "Safer than fuses."

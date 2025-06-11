@@ -6,6 +6,3 @@ class Current_Meter(Component):
         self.pos_pin1 = None
         self.pos_pin2 = None
         self.name = "M"
-        self.properties = [
-            ["Voltage", 0],            
-        ]

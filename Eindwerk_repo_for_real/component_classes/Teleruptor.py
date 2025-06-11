@@ -9,8 +9,6 @@ class Teleruptor(Component):
         self.pos_pin4 = None
         self.name = "S"
 
-        self.properties = [
-            ["Ohm", 0],      
-            ["Voltage", 0],   
+        self.properties = [     
             ["Amps", 0]       
         ]

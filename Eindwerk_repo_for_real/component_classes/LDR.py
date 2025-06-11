@@ -7,5 +7,6 @@ class LDR(Component):
         self.pos_pin2 = None
         self.name = "R"
         self.properties = [
-            ["ohm", 0],            
+            ["R_Dark", 0],    
+            ["R_Light", 0]        
         ]

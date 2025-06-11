@@ -7,5 +7,6 @@ class Capacitor(Component):
         self.pos_pin2 = None
         self.name = "C"
         self.properties = [
-            ["Farad", 0],            
+            ["µF", 0],   
+            ["Voltage", 0]         
         ]

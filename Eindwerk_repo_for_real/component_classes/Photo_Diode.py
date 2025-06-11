@@ -6,6 +6,3 @@ class Photo_Diode(Component):
         self.pos_pin1 = None
         self.pos_pin2 = None
         self.name = "D"
-        self.properties = [
-            ["Voltage", 0],            
-        ]

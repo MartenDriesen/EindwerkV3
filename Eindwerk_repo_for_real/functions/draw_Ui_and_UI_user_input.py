@@ -1,5 +1,5 @@
 import pygame
-from main.global_constants import font, font4, screen, ui, ui2, new_height, new_width2, SCREEN_HEIGHT, SCREEN_WIDTH, LIGHT_BLUE, GREEN, YELLOW, BROWN, RED, BLACK, WHITE
+from main.global_constants import font, font4, screen, ui, ui2, uigreen, new_height, new_width2, SCREEN_HEIGHT, SCREEN_WIDTH, LIGHT_BLUE, GREEN, YELLOW, BROWN, RED, BLACK, WHITE
 new_width = SCREEN_WIDTH  # The width should be equal to the screen width
 new_height2 = SCREEN_HEIGHT
 
@@ -36,12 +36,15 @@ for i in range(len(colors)):
     rect = pygame.Rect(x_start + i * spacing, y_start + 5, rect_width, rect_height)
     rectangles.append(rect)
 
-def draw_Ui(hide_left_menu, env_temp, env_light, user_input_temp_bool, user_input_light_bool):
+def draw_Ui(hide_left_menu, is_teacher):
     
     # Calculate the new width to fit the screen width, keeping the aspect ratio
     
     # Scale the image to the new dimensions
-    scaled_ui = pygame.transform.smoothscale(ui, (new_width, new_height))
+    if is_teacher:
+        scaled_ui = pygame.transform.smoothscale(uigreen, (new_width, new_height))
+    else:
+        scaled_ui = pygame.transform.smoothscale(ui, (new_width, new_height))
     # Scale the image to the new dimensions
     scaled_ui2 = pygame.transform.smoothscale(ui2, (new_width2, new_height2))
     if not hide_left_menu:

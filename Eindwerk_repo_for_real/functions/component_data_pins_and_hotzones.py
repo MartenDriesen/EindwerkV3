@@ -550,4 +550,5 @@ component_pinout_with_hotzones = {
         {"zone": [(75, 85), (55, 65)], "pin": (80, 60)},
     ],
 },
+
 }

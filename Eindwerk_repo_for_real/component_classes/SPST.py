@@ -8,6 +8,3 @@ class SPST(Component):
         self.pos_pin2 = None
         self.pos_pin3 = None
         self.name = "S"
-        self.properties = [
-            ["Voltage", 0],            
-        ]

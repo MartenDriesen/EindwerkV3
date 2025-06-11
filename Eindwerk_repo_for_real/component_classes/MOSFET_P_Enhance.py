@@ -6,7 +6,9 @@ class MOSFET_P_Enhance(Component):
         self.pos_pin1 = None
         self.pos_pin2 = None
         self.pos_pin3 = None
-        self.name = "T"
+        self.name = "Q"
         self.properties = [
-            ["Voltage", 0],            
+            ["Max drain-src voltage", 0],
+            ["Max drain current", 0],
+            ["Treshold Voltage", 0]         
         ]

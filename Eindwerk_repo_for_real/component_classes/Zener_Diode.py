@@ -7,5 +7,5 @@ class Zener_Diode(Component):
         self.pos_pin2 = None
         self.name = "D"
         self.properties = [
-            ["Voltage", 0],            
+            ["Zener breakdown voltage", 0],            
         ]

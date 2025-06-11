@@ -7,7 +7,8 @@ class Transformer(Component):
         self.pos_pin2 = None
         self.pos_pin3 = None
         self.pos_pin4 = None
-        self.name = "S"
+        self.name = "T"
         self.properties = [
-            ["Voltage", 0],            
+            ["Primary Voltage", 0],   
+            ["Secundary Voltage", 0],         
         ]

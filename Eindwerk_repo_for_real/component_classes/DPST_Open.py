@@ -8,6 +8,3 @@ class DPST_Open(Component):
         self.pos_pin3 = None
         self.pos_pin4 = None
         self.name = "S"
-        self.properties = [
-            ["Voltage", 0],            
-        ]

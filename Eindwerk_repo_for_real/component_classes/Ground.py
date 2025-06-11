@@ -5,6 +5,3 @@ class Ground(Component):
         super().__init__(image_path="./images/Ground.png", size_x=40, size_y=40)
         self.pos_pin1 = None
         self.name = "G"
-        self.properties = [
-            ["Voltage", 0],            
-        ]

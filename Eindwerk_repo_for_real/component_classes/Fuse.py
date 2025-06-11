@@ -7,5 +7,5 @@ class Fuse(Component):
         self.pos_pin2 = None
         self.name = "F"
         self.properties = [
-            ["Amps", 0],            
+            ["Max amps", 0],            
         ]

@@ -204,7 +204,7 @@ def load_file():
 
             print("updated")
             # Call show_project_name() to display the updated project name
-
+        print(loaded_connections)
         # Ensure Tkinter cleanup
         root.quit()
         root.destroy()

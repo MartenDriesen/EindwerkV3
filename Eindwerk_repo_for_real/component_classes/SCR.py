@@ -7,7 +7,9 @@ class SCR(Component):
         self.pos_pin1 = None
         self.pos_pin2 = None
         self.pos_pin3 = None
-        self.name = "T"
+        self.name = "Q"
         self.properties = [
-            ["Voltage", 0],            
+            ["Forward blocking voltage", 0],
+            ["Gate trigger current", 0],
+            ["Holding current", 0]            
         ]

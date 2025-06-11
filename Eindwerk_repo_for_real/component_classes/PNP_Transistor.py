@@ -6,7 +6,12 @@ class PNP_Transistor(Component):
         self.pos_pin1 = None
         self.pos_pin2 = None
         self.pos_pin3 = None
-        self.name = "T"
+        self.name = "Q"
         self.properties = [
-            ["Voltage", 0],            
+            ["Max collector-emitter voltage", 0],
+            ["Current gain", 0],
+            ["Saturation voltage", 0],
+            ["Base-emitter turn-on voltage", 0],
+            ["Transition frequency", 0],
+            ["Max collector current", 0]         
         ]

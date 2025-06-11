@@ -8,5 +8,8 @@ class Triac(Component):
         self.pos_pin3 = None
         self.name = "S"
         self.properties = [
-            ["Voltage", 0],            
+            ["Max blocking voltage", 0], 
+            ["Gate trigger current", 0],    
+            ["Holding current", 0],   
+            ["Max surge current", 0],            
         ]

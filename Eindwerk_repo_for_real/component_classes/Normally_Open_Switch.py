@@ -6,6 +6,3 @@ class Normally_Open_Switch(Component):
         self.pos_pin1 = None
         self.pos_pin2 = None
         self.name = "S"
-        self.properties = [
-            ["Voltage", 0],            
-        ]

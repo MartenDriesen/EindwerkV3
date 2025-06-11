@@ -10,6 +10,3 @@ class TPST_Open(Component):
         self.pos_pin5 = None
         self.pos_pin6 = None
         self.name = "S"
-        self.properties = [
-            ["Voltage", 0],            
-        ]

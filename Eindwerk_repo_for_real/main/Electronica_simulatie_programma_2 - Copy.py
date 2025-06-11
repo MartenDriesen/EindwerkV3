@@ -10,7 +10,8 @@ if project_path not in sys.path:
 from main.global_constants import *
 
 from functions.logo import logo
-from functions.invitations import invitations
+
+from functions.manual import open_manual
 from functions.manage_classes_button import manage_classes_button, upload_feedback
 from functions.login import draw_login_register_menu, logout, show_user
 from functions.draw_virtual_grid import draw_virtual_grid
@@ -142,6 +143,7 @@ edit_component_props = None
 right_clicked_comp = None
 logged_user = None
 
+is_teacher = None
 class_menu_open = False
 menu_is_open = False
 placed_comp_is_saved_comp = False
@@ -580,7 +582,7 @@ while running:
             draw_bounding_rectangle(bounding_rectangle_meassurements)
  
     draw_collision_circles(components, connections, camera_offset_x, camera_offset_y, zoom_factor)
-    draw_Ui(hide_menu, env_temp, env_light, user_input_temp_bool, user_input_light_bool)
+    draw_Ui(hide_menu, is_teacher)
     loaded_components, loaded_connections, hand_cursor = newFile(mouse_pos, left_mouse_button, components, connections, hand_cursor)
     show_project_name()
 
@@ -595,6 +597,8 @@ while running:
 
     if imported_components or imported_connections:
         selected_components, selected_comps_wires = imported_components, imported_connections
+        selected_wires = imported_connections
+
         raw_offsets_comp.clear()
         raw_offsets_line.clear()
         bounding_rectangle_meassurements, bounding_rectangle = calculate_bounding_rectangle(selected_components, selected_wires, camera_offset_x, camera_offset_y, zoom_factor) 
@@ -627,19 +631,21 @@ while running:
 
     if not hide_menu:    
         comp_name, saved_comp, hand_cursor = componentMenus(event ,mouse_pos, screen, new_height, adding_component, selected_comps_wires, dragged_component, virtual_selecting_box, menu_is_open, hand_cursor) 
-    
+
     if (placed_comp and hasattr(edit_component_props, "properties") and not edit_component_props.edited and not placed_comp_is_saved_comp) or (right_clicked_comp and hasattr(right_clicked_comp, "properties")):
+            
             if right_clicked_comp:
                 edit_component_props = right_clicked_comp
             saved_component, hand_cursor = properties_menu(edit_component_props, left_mouse_button, mouse_pos, key_down_event, hand_cursor)
 
    
-    if saved_component and placed_comp:
+    if saved_component:
         edit_component_props = None
         right_clicked_comp = None
         if saved_component is not 1:
             save_component(saved_component)
         saved_component = None
+    
 
     
 
@@ -667,24 +673,25 @@ while running:
     else:
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW) 
         
-   
+    open_manual(key_down_event)
     shortcuts(mouse_pos)
 
     if not start_menu_is_open and not logged_user:
         remember_hotzone_pos = None
         mouse_in_hotzone = False                                                                                                       
         userdetails = draw_login_register_menu(key_down_event, mouse_pos, left_mouse_button)
-        if userdetails != (None, None):
-            logged_user, user_id = userdetails
+        if userdetails and len(userdetails) == 3:
+            logged_user, user_id, is_teacher = userdetails
     loggedout = logout(mouse_pos, left_mouse_button)
-    show_user(logged_user)
+    show_user(logged_user, is_teacher)
 
     if loggedout:
         logged_user = None
         loggedout = False
         user_id = None
-    class_menu_open, loaded_components, loaded_connections = manage_classes_button(mouse_pos, left_mouse_button, user_id, key_down_event, logged_user)
-    invitations(mouse_pos, left_mouse_button, logged_user)
+        is_teacher = None
+    class_menu_open, loaded_components, loaded_connections = manage_classes_button(mouse_pos, left_mouse_button, user_id, key_down_event, logged_user, is_teacher)
+
     get_feedback(components, virtual_mouse_pos, dragged_component, selected_comps_wires, drawing_line, left_mouse_button, key_down_event)
 
     upload_feedback(mouse_pos, left_mouse_button, components, connections)

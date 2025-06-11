@@ -5,7 +5,8 @@ class DC_Motor(Component):
         super().__init__(image_path="./images/DC_motor.png", size_x=40, size_y=80)
         self.pos_pin1 = None
         self.pos_pin2 = None
-        self.name = "V"
+        self.name = "M"
         self.properties = [
-            ["rpm", 0],            
+            ["rpm", 0],   
+            ["Voltage", 0]         
         ]

@@ -13,6 +13,7 @@ screen_rect = screen.get_rect()
 # ui image
 ui = pygame.image.load("./images/menus/ui.png")
 ui2 = pygame.image.load("./images/menus/ui2.png")
+uigreen = pygame.image.load("./images/menus/uigreen.png")
 # get ui size
 original_width, original_height = ui.get_size()
 original_width2, original_height2 = ui2.get_size()
@@ -40,6 +41,7 @@ ORANGE = (255,175,0)
 BROWN = (130,60,0)
 YELLOW = (255,255,0)
 GREEN = (0,200,30)
+ORANGE = (255, 140, 0)
 #general
 BUTTON_WIDTH, BUTTON_HEIGHT = 150, 50
 LABEL_WIDTH, LABEL_HEIGHT = 150, 50
@@ -58,3 +60,4 @@ font3 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/P
 font4 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Goldman-Regular.ttf", 24)
 font5 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 12)
 font6 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 6)
+font7 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Bold.ttf", 14)

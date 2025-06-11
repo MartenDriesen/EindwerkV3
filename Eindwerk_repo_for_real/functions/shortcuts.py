@@ -3,14 +3,14 @@ import pygame
 
 def shortcuts(mouse_pos):
     # --- Render "shortcuts" text ---
-    save_text = font2.render("shortcuts", True, WHITE)
-    save_rect = save_text.get_rect(topleft=(15, SCREEN_HEIGHT - 80))  # tightly fit text
+    shortcuts_text = font2.render("help", True, WHITE)
+    shortcuts_rect = shortcuts_text.get_rect(topleft=(500, 12))  # tightly fit text
 
     # --- Blit text ---
-    screen.blit(save_text, save_rect)
+    screen.blit(shortcuts_text, shortcuts_rect)
 
     # --- Hover check ---
-    if save_rect.collidepoint(mouse_pos):
+    if shortcuts_rect.collidepoint(mouse_pos):
         # Draw info panel
         panel_width, panel_height = 400, 400
         panel_rect = pygame.Rect(0, 0, panel_width, panel_height)
@@ -20,17 +20,18 @@ def shortcuts(mouse_pos):
 
         # Display shortcut text
         shortcuts_list = [
+            "Ctrl + M: Open manual",
             "Ctrl + S: Save",
             "Ctrl + Z: Undo",
             "Ctrl + shift + Z: Redo",
-            "Delete: Delete (delete selected component)", 
+            "Delete: delete selected", 
             "Ctrl + C: Copy",
             "Ctrl + V: Paste",
             "hold shift to drag camera",
             "Ctrl + scroll: zoom in/out",
             "Ctrl + A: select all",
-            "R: rotate selected"
-            "escape: stop drawing line"
+            "R: rotate selected",
+            "Escape: stop drawing line"
             
         ]
 

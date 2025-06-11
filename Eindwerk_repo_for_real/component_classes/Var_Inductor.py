@@ -7,5 +7,5 @@ class Var_Inductor(Component):
         self.pos_pin2 = None
         self.name = "L"
         self.properties = [
-            ["henry", 0],            
+            ["Henry", 0],            
         ]
