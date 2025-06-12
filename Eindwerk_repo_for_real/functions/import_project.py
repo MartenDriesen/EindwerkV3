@@ -2,6 +2,7 @@ from main.global_constants import font2, WHITE, SCREEN_HEIGHT, screen, SCREEN_WI
 
 from component_classes.subConnection import subConnection
 
+from component_classes.Socket import Socket
 from component_classes.Connection import Connection
 from component_classes.AC_Motor import AC_Motor
 from component_classes.DC_Motor import DC_Motor
@@ -60,6 +61,7 @@ from component_classes.SPST import SPST
 from component_classes.TPST_Open import TPST_Open
 from component_classes.Staircase_Timer_Auto import Staircase_Timer_Auto
 from component_classes.Circuit_Breaker import Circuit_Breaker
+from component_classes.Lamp import Lamp
 
 import json
 from uuid import UUID
@@ -143,7 +145,9 @@ def load_file():
         "TPST_Open": TPST_Open,
         "Staircase_Timer_Auto": Staircase_Timer_Auto,
         "Circuit_Breaker": Circuit_Breaker,
-        "Connection": Connection
+        "Connection": Connection,
+        "Socket": Socket,
+        "Lamp": Lamp
     }
 
     try:

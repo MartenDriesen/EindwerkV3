@@ -290,11 +290,11 @@ componentsMenu = [
     "Resistors",
     "Capacitors",
     "Diodes",
-    "Switches",
+    "Residential",
+    "Residential_2",
     "Powersources",
     "Grounds",
     "Inductors",
-    "Fuses",
     "Meters",
     "Motors",
     "Transistors",
@@ -375,11 +375,13 @@ Meters = [
     ("Power Meter", load_and_scale_image("./images/Power_Meter.png", 80, 40)),
 ]
 
-Fuses = [
+Residential_2 = [
     ("Fuse", load_and_scale_image("./images/Fuse.png", 80, 40)),
+    ("Socket", load_and_scale_image("./images/Socket.png", 40, 40)),
+    ("Lamp", load_and_scale_image("./images/Lamp.png", 80, 40)),
 ]
 
-Switches = [
+Residential = [
     ("Normally Open Relay", load_and_scale_image("./images/Relay_open.png", 80, 40)),
     ("SPS Open", load_and_scale_image("./images/switches/SPS_Open.png", 80, 40)),
     ("DPST Open", load_and_scale_image("./images/switches/DPST_Open.png", 80, 40)),

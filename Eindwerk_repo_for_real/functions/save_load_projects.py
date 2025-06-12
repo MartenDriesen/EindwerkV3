@@ -8,6 +8,7 @@ import time
 from main.global_constants import screen, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, RED, LIGHT_BLUE
 from component_classes.subConnection import subConnection
 
+from component_classes.Socket import Socket
 from component_classes.Connection import Connection
 from component_classes.AC_Motor import AC_Motor
 from component_classes.DC_Motor import DC_Motor
@@ -67,6 +68,7 @@ from component_classes.TPST_Open import TPST_Open
 from component_classes.Staircase_Timer_Auto import Staircase_Timer_Auto
 from component_classes.Circuit_Breaker import Circuit_Breaker
 from component_classes.feedbackBlock import feedbackBlock
+from component_classes.Lamp import Lamp
 from main.global_constants import font2
 # Initialize Pygame
 pygame.init()
@@ -597,7 +599,9 @@ def load_file_explorer(current_components, current_connections):
         "Staircase_Timer_Auto": Staircase_Timer_Auto,
         "Circuit_Breaker": Circuit_Breaker,
         "feedbackBlock": feedbackBlock,
-        "Connection": Connection
+        "Connection": Connection,
+        "Socket": Socket,
+        "Lamp": Lamp
     }
 
     try:
@@ -779,7 +783,9 @@ def load_mongo_file(file_content, file_name):
         "Staircase_Timer_Auto": Staircase_Timer_Auto,
         "Circuit_Breaker": Circuit_Breaker,
         "feedbackBlock": feedbackBlock,
-        "Connection": Connection
+        "Connection": Connection,
+        "Socket": Socket,
+        "Lamp": Lamp
     }
     try:
         import json

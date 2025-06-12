@@ -181,7 +181,7 @@ component_pinout_with_hotzones = {
         {"zone": [(-5, 5), (55, 65)], "pin": (0, 60)},
     ],
 },
-("AC_Motor", "DC_Motor", "AC_Voltage_Src", "DC_Voltage_Src", "Current_Meter", "Volt_Meter", "Power_Meter", "Ohm_Meter"): {
+("AC_Motor", "DC_Motor", "AC_Voltage_Src", "DC_Voltage_Src", "Current_Meter", "Volt_Meter", "Power_Meter", "Ohm_Meter","Lamp"): {
         0: [
             {"zone": [(15, 25), (-5, 5)], "pin": (20, 0)},
             {"zone": [(15, 25), (75, 85)], "pin": (20, 80)},
@@ -550,5 +550,18 @@ component_pinout_with_hotzones = {
         {"zone": [(75, 85), (55, 65)], "pin": (80, 60)},
     ],
 },
-
+("Socket"):{
+     0: [
+        {"zone": [(35, 45), (15,25)], "pin": (40, 20)},
+    ],
+    90: [ 
+        {"zone": [(15, 25), (-5, 5)], "pin": (20, 0)},
+    ],
+    180: [ 
+        {"zone": [(-5, 5), (15, 25)], "pin": (0, 20)},
+    ],
+    270: [ 
+       {"zone": [(15, 25), (35, 45)], "pin": (20, 40)},
+    ],
+},
 }

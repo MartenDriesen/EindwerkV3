@@ -132,6 +132,7 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
             input_active["password"] = False
 
     # Typing input
+    enter_pressed = False
     if event:
         active_key = "name" if input_active["name"] else "password" if input_active["password"] else None
         if active_key:
@@ -140,8 +141,11 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
             elif event.key == pygame.K_RETURN:
                 input_active["name"] = False
                 input_active["password"] = False
+                enter_pressed = True
             elif len(user_input[active_key]) < 20 and event.unicode.isprintable():
                 user_input[active_key] += event.unicode
+        elif event.key == pygame.K_RETURN:
+            enter_pressed = True
 
     # Register: teacher/student checkboxes under each other, left align with input fields, label right of box
     teacher_rect = student_rect = None
@@ -183,6 +187,9 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
         screen.blit(register_text, register_text.get_rect(center=register_rect.center))
         if mouse_click and mouse_pos and register_rect.collidepoint(mouse_pos):
             status_message = handle_register()
+        # Allow pressing Enter to register
+        elif enter_pressed:
+            status_message = handle_register()
     else:
         login_rect = pygame.Rect(0, 0, button_width, button_height)
         login_rect.centerx = menu_center_x
@@ -196,6 +203,9 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
         login_text = font.render("Login", True, WHITE)
         screen.blit(login_text, login_text.get_rect(center=login_rect.center))
         if mouse_click and mouse_pos and login_rect.collidepoint(mouse_pos):
+            status_message = handle_login()
+        # Allow pressing Enter to login
+        elif enter_pressed:
             status_message = handle_login()
 
     # ✅ Return username and user_id and is_teacher if successful, else None

@@ -106,6 +106,8 @@ from component_classes.TPST_Open import TPST_Open
 from component_classes.Staircase_Timer_Auto import Staircase_Timer_Auto
 from component_classes.Circuit_Breaker import Circuit_Breaker
 from component_classes.feedbackBlock import feedbackBlock
+from component_classes.Socket import Socket
+from component_classes.Lamp import Lamp
 
 components = []
 connections = []
@@ -619,13 +621,13 @@ while running:
         
         loaded_components, loaded_connections, hand_cursor = load_project(mouse_pos, left_mouse_button, components, connections, menu_is_open, hand_cursor)
 
-        if loaded_components or loaded_connections:
-            components = loaded_components
-            connections = loaded_connections
-            loaded_components = None
-            loaded_connections = None
-            timeline_cntrl_shift_z = []
-            timeline = [] 
+    if loaded_components or loaded_connections:
+        components = loaded_components
+        connections = loaded_connections
+        loaded_components = None
+        loaded_connections = None
+        timeline_cntrl_shift_z = []
+        timeline = [] 
 
 
 
