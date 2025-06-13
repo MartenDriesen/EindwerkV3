@@ -16,8 +16,8 @@ def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cur
     mouse_x, mouse_y = mouse_pos
 
     # Load and scale the menu background
-    properties_menu_image = pygame.image.load("./images/menus/properties.png")
-    properties_menu_image = pygame.transform.smoothscale(properties_menu_image, (350, 245))
+    properties_menu_image = pygame.image.load("./images/menus/propertiesbig.png")
+    properties_menu_image = pygame.transform.smoothscale(properties_menu_image, (800, 245))
 
     if not input_selected:
         active_field = component.properties[0][0]
@@ -28,12 +28,18 @@ def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cur
 
     # Render text
     place_text = font.render(place, True, WHITE)
+    # Adjust y of component_name_text_rect to be properties_menu_rect.top - 50
+    # (move the assignment here so properties_menu_rect is defined)
+    # So, move the assignment of component_name_text and component_name_text_rect here:
+    component_name = component.__class__.__name__  # Dynamically fetch the class name
+    component_name_text = font.render(component_name, True, WHITE)
+    # Create the menu rect and center it
+    properties_menu_rect = properties_menu_image.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
+    component_name_text_rect = component_name_text.get_rect(center=(SCREEN_WIDTH / 2, properties_menu_rect.top + 18))
     place_and_save_component_text = font.render(place_and_save_component, True, WHITE)
 
     # Display the component's class name
-    component_name = component.__class__.__name__  # Dynamically fetch the class name
-    component_name_text = font.render(component_name, True, WHITE)
-    component_name_text_rect = component_name_text.get_rect(center=(SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 2) - 100))
+ 
 
     # Create the menu rect and center it
     properties_menu_rect = properties_menu_image.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
@@ -44,7 +50,7 @@ def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cur
     place_text_button_rect = place_text_rect.inflate(button_padding * 2, button_padding * 2)
 
     place_and_save_component_text_rect = font.render(place_and_save_component, True, WHITE).get_rect(
-        center=((SCREEN_WIDTH / 2) - 55, (SCREEN_HEIGHT / 2) + 95)
+        center=((SCREEN_WIDTH / 2) - 65, (SCREEN_HEIGHT / 2) + 95)
     )
     place_and_save_component_button_rect = place_and_save_component_text_rect.inflate(button_padding * 2, button_padding * 2)
 
@@ -113,11 +119,11 @@ def properties_menu(new_component, left_mouse_button, mouse_pos, event, hand_cur
         row = i // 2    # Row index
     
     # Calculate the x and y positions for the input fields
-        x_offset = (SCREEN_WIDTH / 2) - 125 + (column * 150)  # 150px between columns
+        x_offset = (SCREEN_WIDTH / 2) - 175 + (column * 270)  # 150px between columns
         y_offset = (SCREEN_HEIGHT / 2) - 80 + row * 40      # 40px between rows
 
     # Create the input field rect
-        input_field_rect = pygame.Rect(0, 0, 55, 22)  # Width 50, height 22
+        input_field_rect = pygame.Rect(0, 0, 70, 22)  # Width 50, height 22
         input_field_rect.topleft = (x_offset, y_offset)  # Position rect at calculated offset
         input_fields.append((input_field_rect, prop_name))
 

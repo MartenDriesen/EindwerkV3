@@ -429,8 +429,11 @@ saved_component_text_color = WHITE  # Initial color for "Saved components" text
 dropdown_x = 210
 dropdown_y = 200
 
+cross_img = pygame.image.load("./images/icons/cross.png")
+cross_img = pygame.transform.smoothscale(cross_img, (8, 8))
+
 def componentMenus(event, mouse_pos, screen, ui_height, adding_comp, selected_comps_wires, dragged_comp, virtual_selecting_box, menu_is_open, hand_cursor):
-    global componentDropdown_visible, saved_components_Dropdown_visible, dropdown_timer, dropdown_border_rect, menu, nameForClass, saved_component_text_color, scroll_offset, dropdown_x, dropdown_y
+    global componentDropdown_visible, saved_components_Dropdown_visible, dropdown_timer, dropdown_border_rect, menu, nameForClass, saved_component_text_color, scroll_offset, dropdown_x, dropdown_y, saved_components
     selected_saved_comp = None
     # Titles and their positions
     saved_component_text_rect = saved_component_text.get_rect(topleft=(20, ui_height))
@@ -493,14 +496,26 @@ def componentMenus(event, mouse_pos, screen, ui_height, adding_comp, selected_co
             screen.blit(saved_components_menu_background, dropdown_item_rect)  # Draw extra background
 
         # Render the saved components and their details
+        cross_rects = []  # Store cross rects for click detection
         for i, comp in enumerate(saved_components[:3 + num_extra_backgrounds]):  # Only render up to the max backgrounds needed
             img_y = dropdown_y + 25 + (50 * i)  # Y position for each component in the dropdown
             name_y = dropdown_y + 20 + (50 * i)  # Name Y position for each component
 
             # Define the rectangle area for each dropdown item
-            dropdown_item_rect = pygame.Rect(dropdown_x, dropdown_y + (50 * i), 900, 50)
+            dropdown_item_rect = pygame.Rect(dropdown_x + 20, dropdown_y + (50 * i), 880, 50)
+            dropdown_item_full_rect = pygame.Rect(dropdown_x, dropdown_y + (50 * i), 900, 50)
+
+            # Draw cross icon and store its rect for click detection
+            cross_x = dropdown_x + 5
+            cross_y = dropdown_y + 3 + (50 * i)
+            cross_rect = pygame.Rect(cross_x, cross_y, 8, 8)
+            screen.blit(cross_img, (cross_x, cross_y))
+            cross_rects.append((cross_rect, i))
 
             # Check if the mouse is hovering over this dropdown item
+
+            if dropdown_item_full_rect.collidepoint(mouse_pos):
+                dropdown_timer = pygame.time.get_ticks()
             if dropdown_item_rect.collidepoint(mouse_pos):
                 # Highlight the component name text when hovered
                 component_name_text = font2.render(comp.__class__.__name__, True, HIGHLIGHT_TEXT_COLOR)  # Highlight color for hovered item
@@ -511,7 +526,7 @@ def componentMenus(event, mouse_pos, screen, ui_height, adding_comp, selected_co
                 component_name_text = font.render(comp.__class__.__name__, True, WHITE)
 
             # Draw the dropdown item background (rectangle)
-            screen.blit(saved_components_menu_background, dropdown_item_rect)
+            
 
             # Load and scale component image
             image = load_and_scale_image(comp.image_path, 80, 40)
@@ -535,6 +550,14 @@ def componentMenus(event, mouse_pos, screen, ui_height, adding_comp, selected_co
 
                 # Update `prop_x` for the next property
                 prop_x += prop_name_width + prop_value_text.get_width() + 15  # Add spacing between properties
+
+        # Handle cross click event
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            for cross_rect, idx in cross_rects:
+                if cross_rect.collidepoint(mouse_pos):
+                    if idx < len(saved_components):
+                        del saved_components[idx]
+                        break  # Only delete one per click
 
     # Loop through componentsMenu
     for componentText in componentsMenu:
