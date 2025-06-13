@@ -1,5 +1,5 @@
 from main.global_constants import font2, WHITE, SCREEN_HEIGHT, screen, SCREEN_WIDTH
-
+import pygame
 from component_classes.subConnection import subConnection
 
 from component_classes.Socket import Socket
@@ -73,7 +73,7 @@ def import_project(mouse_pos, left_mouse_button, menu_is_open, hand_cursor):
     imported_comps, imported_connections = None, None
     
     import_text = font2.render("import", True, WHITE)
-    import_text_rect = import_text.get_rect(center=(450, 22))
+    import_text_rect = pygame.Rect(420, 12, 50, 30)
 
     screen.blit(import_text, import_text_rect)
 

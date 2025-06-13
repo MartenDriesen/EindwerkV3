@@ -67,8 +67,8 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
 
         pygame.draw.rect(screen, LIGHT_BLUE, login_rect, border_radius=6)
         pygame.draw.rect(screen, LIGHT_BLUE, register_rect, border_radius=6)
-        login_text = font.render("login", True, WHITE)
-        register_text = font.render("Register", True, WHITE)
+        login_text = font2.render("login", True, WHITE)
+        register_text = font2.render("Register", True, WHITE)
         screen.blit(login_text, login_text.get_rect(center=login_rect.center))
         screen.blit(register_text, register_text.get_rect(center=register_rect.center))
 
@@ -183,7 +183,7 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
             status_rect = status_render.get_rect(center=(menu_center_x, register_rect.top - 30))
             screen.blit(status_render, status_rect)
         pygame.draw.rect(screen, LIGHT_BLUE, register_rect, border_radius=6)
-        register_text = font.render("Register", True, WHITE)
+        register_text = font2.render("Register", True, WHITE)
         screen.blit(register_text, register_text.get_rect(center=register_rect.center))
         if mouse_click and mouse_pos and register_rect.collidepoint(mouse_pos):
             status_message = handle_register()
@@ -200,7 +200,7 @@ def draw_login_register_menu(event, mouse_pos, mouse_click):
             status_rect = status_render.get_rect(center=(menu_center_x, login_rect.top - 30))
             screen.blit(status_render, status_rect)
         pygame.draw.rect(screen, LIGHT_BLUE, login_rect, border_radius=6)
-        login_text = font.render("Login", True, WHITE)
+        login_text = font2.render("Login", True, WHITE)
         screen.blit(login_text, login_text.get_rect(center=login_rect.center))
         if mouse_click and mouse_pos and login_rect.collidepoint(mouse_pos):
             status_message = handle_login()

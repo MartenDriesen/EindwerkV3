@@ -46,7 +46,16 @@ ORANGE = (255, 140, 0)
 BUTTON_WIDTH, BUTTON_HEIGHT = 150, 50
 LABEL_WIDTH, LABEL_HEIGHT = 150, 50
 IMAGE_WIDTH, IMAGE_HEIGHT = 80, 80  # Height is kept the same for now
-FONT_SIZE = 20
+
+# Use scalable font sizes for HD screens
+BASE_FONT_SIZE = 20  # You can adjust this value for your preference
+FONT_SIZE = BASE_FONT_SIZE
+FONT_SIZE_SMALL = int(BASE_FONT_SIZE * 0.6)
+FONT_SIZE_MEDIUM = int(BASE_FONT_SIZE * 0.7)
+FONT_SIZE_LARGE = int(BASE_FONT_SIZE * 0.8)
+FONT_SIZE_XL = int(BASE_FONT_SIZE * 1.2)
+FONT_SIZE_XXS = int(BASE_FONT_SIZE * 0.3)
+
 BG_COLOR = (30, 30, 30)
 BUTTON_COLOR = (50, 50, 200)
 BUTTON_HOVER_COLOR = (70, 70, 255)
@@ -54,10 +63,10 @@ TEXT_COLOR = (255, 255, 255)
 
 DROPDOWN_DELAY = 800  # Delay before hiding the dropdown (in ms)
 
-font = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 12)
-font2 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 14)
-font3 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 16)
-font4 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Goldman-Regular.ttf", 24)
-font5 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 12)
-font6 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", 6)
-font7 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Bold.ttf", 14)
+font = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", FONT_SIZE_SMALL)
+font2 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", FONT_SIZE_MEDIUM)
+font3 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", FONT_SIZE_LARGE)
+font4 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Goldman-Regular.ttf", FONT_SIZE_XL)
+font5 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", FONT_SIZE_SMALL)
+font6 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Medium.ttf", FONT_SIZE_XXS)
+font7 = pygame.font.Font("C:/Users/marte/AppData/Local/Microsoft/Windows/Fonts/Poppins-Bold.ttf", FONT_SIZE_MEDIUM)
